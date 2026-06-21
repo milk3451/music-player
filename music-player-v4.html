@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>404 (New Era) - kiikii</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; background: #111;
+    font-family: -apple-system, 'Noto Sans KR', sans-serif;
+  }
+
+  .phone {
+    width: 390px; height: 844px;
+    position: relative; overflow: hidden;
+  }
+
+  /* 공통 배경 */
+  .bg-layer { position: absolute; inset: 0; z-index: 0; }
+  .bg-blur-orb {
+    position: absolute; inset: -20%;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(180,80,80,0.55) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 65%, rgba(110,35,55,0.45) 0%, transparent 55%);
+    filter: blur(50px);
+  }
+  .bg-grad {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(60,45,45,0.2) 0%, rgba(0,0,0,0.82) 58%, #000 100%);
+  }
+
+  /* 상태바 */
+  .status-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 22px 4px; color: white; flex-shrink: 0;
+  }
+  .status-time { font-size: 16px; font-weight: 600; }
+  .status-right { display: flex; align-items: center; gap: 5px; }
+  .sig-bars { display: flex; align-items: flex-end; gap: 2px; }
+  .sig-bars span { display: block; width: 3px; background: white; border-radius: 1px; }
+  .s5g { font-size: 13px; font-weight: 600; color: white; }
+  .batt { display: flex; align-items: center; gap: 3px; }
+  .batt-body {
+    width: 26px; height: 13px;
+    border: 1.5px solid rgba(255,255,255,0.75);
+    border-radius: 3px; padding: 2px; position: relative;
+  }
+  .batt-body::after {
+    content: ''; position: absolute; right: -4px; top: 50%;
+    transform: translateY(-50%);
+    width: 2px; height: 5px; background: rgba(255,255,255,0.75);
+    border-radius: 0 1px 1px 0;
+  }
+  .batt-fill { height: 100%; width: 71%; background: white; border-radius: 1px; }
+  .batt-pct { font-size: 12px; font-weight: 600; color: white; }
+
+  /* 버튼 공통 */
+  .btn-pill {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 50px;
+    border: 1.5px solid white; background: transparent;
+    color: white; font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: inherit; white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .btn-heart.active .heart-path { fill: #ff3b30; stroke: #ff3b30; }
+  .heart-path { transition: fill 0.2s, stroke 0.2s; }
+  .btn-mixup {
+    background: white; border-color: white; color: #000; margin-left: auto;
+    transition: background 0.2s;
+  }
+  .btn-mixup.active { background: #18f915; border-color: #18f915; }
+  .mixup-tri { fill: #000; }
+
+  /* 화면 전환 */
+  #screen1 {
+    position: absolute; inset: 0; z-index: 10;
+    transition: transform 0.42s cubic-bezier(.32,.72,0,1), opacity 0.32s;
+  }
+  #screen1.slide-out { transform: translateX(-100%); opacity: 0; }
+
+  #screen2 {
+    position: absolute; inset: 0; z-index: 9;
+    transform: translateX(100%); opacity: 0;
+    transition: transform 0.42s cubic-bezier(.32,.72,0,1), opacity 0.32s;
+  }
+  #screen2.slide-in { transform: translateX(0); opacity: 1; z-index: 11; }
+
+  #screen3 {
+    position: absolute; inset: 0; z-index: 8;
+    background: #0e0a0a;
+    transform: translateX(100%); opacity: 0;
+    transition: transform 0.42s cubic-bezier(.32,.72,0,1), opacity 0.32s;
+  }
+  #screen3.slide-in { transform: translateX(0); opacity: 1; z-index: 30; }
+
+  /* ════ 화면 1 ════ */
+  .s1-content {
+    position: relative; z-index: 5;
+    height: 100%; display: flex; flex-direction: column; color: white;
+  }
+  .song-header { padding: 2px 22px 0; flex-shrink: 0; }
+  .song-header-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+  .song-title { font-size: 19px; font-weight: 700; line-height: 1.3; }
+  .song-artist { font-size: 15px; color: rgba(255,255,255,0.75); margin-top: 1px; }
+  .hdr-icons { display: flex; gap: 12px; padding-top: 3px; }
+  .icon-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.85); display: flex; }
+  .album-art {
+    margin: 10px 22px; border-radius: 12px; overflow: hidden;
+    aspect-ratio: 1; background: #333;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.6); flex-shrink: 0;
+  }
+  .album-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .action-btns { display: flex; align-items: center; padding: 8px 22px; gap: 8px; flex-shrink: 0; }
+  .lyrics { padding: 6px 22px 4px; text-align: center; flex-shrink: 0; }
+  .lyrics p { font-size: 13px; line-height: 1.75; }
+  .lyrics p:first-child { color: white; font-weight: 500; }
+  .lyrics p:last-child { color: rgba(255,255,255,0.4); }
+  .progress { padding: 4px 22px 0; flex-shrink: 0; }
+  .prog-track { height: 3px; background: rgba(255,255,255,0.2); border-radius: 10px; cursor: pointer; }
+  .prog-fill { height: 100%; width: 26%; background: #00ff04; border-radius: 10px; position: relative; }
+  .prog-fill::after {
+    content: ''; position: absolute; right: -5px; top: 50%;
+    transform: translateY(-50%); width: 9px; height: 9px; background: white; border-radius: 50%;
+  }
+  .prog-times { display: flex; justify-content: space-between; margin-top: 5px; font-size: 11.5px; color: rgba(255,255,255,0.65); }
+  .player-ctrl { display: flex; align-items: center; justify-content: space-between; padding: 6px 22px 2px; flex-shrink: 0; }
+  .ctrl-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.8); display: flex; align-items: center; padding: 5px; }
+  .ctrl-btn.play svg { width: 58px; height: 58px; }
+  .bottom-nav { display: flex; align-items: center; justify-content: space-between; padding: 6px 34px 24px; margin-top: auto; flex-shrink: 0; }
+  .nav-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; }
+
+  /* ════ 화면 2 ════ */
+  .s2-content {
+    position: relative; z-index: 5;
+    height: 100%; display: flex; flex-direction: column; color: white; overflow: hidden;
+  }
+  .s2-now { text-align: center; padding: 0 22px 1px; font-size: 11px; font-weight: 600; color: #6cd789; letter-spacing: 0.5px; flex-shrink: 0; }
+  .s2-now-border { display: inline-block; border: 1.5px solid #14cd45; border-radius: 12px; padding: 1px 10px; }
+  .s2-song-row { display: flex; align-items: center; justify-content: space-between; padding: 1px 18px 1px; flex-shrink: 0; }
+  .s2-dots { background: none; border: none; cursor: pointer; color: white; padding: 4px 2px; }
+  .s2-song-info { text-align: center; flex: 1; }
+  .s2-title { font-size: 16px; font-weight: 700; }
+  .s2-artist { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 1px; }
+  .s2-chevron { background: none; border: none; cursor: pointer; color: white; padding: 4px 2px; }
+  .s2-album {
+    width: 258px; height: 258px;
+    margin: 6px auto 20px; border-radius: 10px; overflow: hidden;
+    background: #333; box-shadow: 0 14px 40px rgba(0,0,0,0.55); flex-shrink: 0;
+    transition: transform 0.1s ease-out;
+  }
+  .s2-album.collapsed { transform: translateY(18px); }
+  .s2-album img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s2-mid { flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; height: 104px; transition: transform 0.1s ease-out; }
+  .s2-mid.collapsed { transform: translateY(115px); }
+  .s2-action-btns { display: flex; align-items: center; padding: 0 22px 16px; gap: 8px; }
+  .s2-prog { padding: 0 22px; }
+  .s2-prog-track { height: 3px; background: rgba(255,255,255,0.2); border-radius: 10px; cursor: pointer; }
+  .s2-prog-fill { height: 100%; width: 26%; background: #00ff04; border-radius: 10px; position: relative; }
+  .s2-prog-fill::after {
+    content: ''; position: absolute; right: -5px; top: 50%;
+    transform: translateY(-50%); width: 9px; height: 9px; background: white; border-radius: 50%;
+  }
+  .s2-prog-times { display: flex; justify-content: space-between; margin-top: 4px; font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  /* ════ 믹스업 오버레이 (화면1 위에 올라오는 바텀시트) ════ */
+  #mixup-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 54%; z-index: 25;
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(.32,.72,0,1);
+    pointer-events: none;
+    display: flex; flex-direction: column;
+  }
+  #mixup-overlay.open {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* 바텀 시트 */
+  .bottom-sheet {
+    flex: 1; min-height: 0;
+    background: rgba(55,55,55,0.97);
+    backdrop-filter: blur(20px);
+    border-top-left-radius: 22px; border-top-right-radius: 22px;
+    border: 1.5px solid rgba(220,220,220,0.25); border-bottom: none;
+    display: flex; flex-direction: column; overflow: hidden; margin-top: 0;
+  }
+  .sheet-handle { width: 36px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 10px; margin: 8px auto 0; flex-shrink: 0; }
+  .sheet-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px 2px; flex-shrink: 0; }
+  .sheet-title-group { display: flex; align-items: center; gap: 6px; }
+  .sheet-title { font-size: 16px; font-weight: 700; color: white; }
+  .smart-badge { font-size: 10px; font-weight: 700; color: #6cd789; border: 1.5px solid #14cd45; border-radius: 20px; padding: 1px 7px; }
+  .sheet-refresh { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 4px; font-size: 12px; font-family: inherit; transition: opacity 0.2s; }
+  .sheet-refresh:active { opacity: 0.5; }
+  .refresh-icon { transition: transform 0.5s ease; }
+  .refresh-icon.spinning { transform: rotate(360deg); }
+  .sheet-sub { display: flex; align-items: center; gap: 5px; padding: 0 16px 6px; font-size: 12px; color: rgba(255,255,255,0.65); flex-shrink: 0; }
+  .track-list { overflow-y: auto; flex: 1; padding: 0 12px; }
+  .track-item { display: flex; align-items: center; gap: 10px; padding: 8px 4px; border-bottom: 1px solid rgba(255,255,255,0.07); animation: trackFadeIn 0.3s ease; }
+  @keyframes trackFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .track-art { width: 50px; height: 50px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #555; }
+  .track-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .track-info { flex: 1; min-width: 0; }
+  .track-name { font-size: 14px; font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .track-artist { font-size: 12px; color: rgba(175,164,164,1); margin-top: 1px; }
+  .track-sim { font-size: 11px; color: #40ff00; font-weight: 600; margin-top: 2px; }
+  .track-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .track-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.8); display: flex; padding: 3px; transition: color 0.2s; }
+
+  /* + 버튼 추가됨 상태 */
+  .track-btn.added { color: #18f915; }
+
+  .add-playlist-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin: 6px 12px 16px; padding: 13px;
+    border: 1.5px solid rgba(140,140,140,0.45); border-radius: 14px;
+    background: transparent; color: white; font-size: 14px; font-weight: 500;
+    cursor: pointer; font-family: inherit; flex-shrink: 0;
+  }
+
+  /* ════ 화면 3 ════ */
+  .s3-content {
+    position: relative; z-index: 5;
+    height: 100%; display: flex; flex-direction: column; color: white;
+  }
+
+  /* 이전 버튼 */
+  .s3-topbar {
+    padding: 2px 16px 4px; flex-shrink: 0;
+  }
+  .s3-back-btn {
+    display: flex; align-items: center; gap: 4px;
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 500;
+    font-family: inherit; padding: 4px 0;
+  }
+
+  /* 상단 탭 바 */
+  .s3-tabs {
+    display: flex; align-items: stretch;
+    padding: 4px 16px 0; gap: 0; flex-shrink: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .s3-tab-group { display: flex; align-items: stretch; gap: 8px; }
+  .s3-tab {
+    flex: 0 0 auto; background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.45); font-size: 13.5px; font-weight: 600;
+    font-family: inherit; padding: 8px 14px 10px;
+    position: relative; text-align: center;
+    transition: color 0.2s;
+  }
+  .s3-tab.active { color: white; }
+  .s3-tab.active::after {
+    content: ''; position: absolute; bottom: 0; left: 10%; right: 10%;
+    height: 2px; background: white; border-radius: 2px;
+  }
+  .s3-tab-icons { margin-left: auto; display: flex; align-items: center; gap: 4px; padding-bottom: 4px; }
+  .s3-tab-icon-btn {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.7); display: flex; align-items: center;
+    padding: 4px 6px;
+  }
+
+  /* 빈 상태 */
+  .s3-empty {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+    color: rgba(255,255,255,0.4); padding: 40px;
+  }
+  .s3-empty-icon { opacity: 0.3; }
+  .s3-empty p { font-size: 15px; text-align: center; line-height: 1.6; }
+
+  /* 추가된 곡 목록 */
+  .s3-list { flex: 1; overflow-y: auto; padding: 0 16px; }
+  .s3-track {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    animation: fadeSlideIn 0.3s ease;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .s3-track-num { width: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .s3-track-circle { width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.55); flex-shrink: 0; }
+  .s3-track-art { width: 54px; height: 54px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #555; }
+  .s3-track-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s3-track-info { flex: 1; min-width: 0; }
+  .s3-track-name { font-size: 15px; font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s3-track-artist { font-size: 12px; color: rgba(175,164,164,1); margin-top: 2px; }
+  .s3-track-remove {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.35); display: flex; padding: 4px;
+    transition: color 0.2s;
+  }
+  .s3-track-remove:hover { color: rgba(255,255,255,0.7); }
+
+  /* 하단 재생 바 (화면3) */
+  .s3-footer {
+    flex-shrink: 0; padding: 12px 22px 28px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .s3-play-all {
+    display: flex; align-items: center; gap: 8px;
+    background: white; color: #000;
+    border: none; border-radius: 50px;
+    padding: 12px 28px; font-size: 15px; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+  }
+  .s3-count-label { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* 재생목록 / 음악서랍 패널 래퍼 */
+  .s3-playlist-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* 음악서랍 탭 콘텐츠 */
+  .s3-drawer-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; display: none; }
+  /* 가로 필터 탭 */
+  .s3-drawer-filter-bar { display: flex; gap: 8px; padding: 12px 16px 8px; flex-shrink: 0; overflow-x: auto; }
+  .s3-drawer-filter-bar::-webkit-scrollbar { display: none; }
+  .s3-drawer-filter-btn {
+    flex-shrink: 0; background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.15); border-radius: 20px;
+    color: rgba(255,255,255,0.6); font-size: 13px; font-weight: 600;
+    font-family: inherit; padding: 6px 16px; cursor: pointer; transition: all 0.18s;
+  }
+  .s3-drawer-filter-btn.active { background: white; border-color: white; color: #000; }
+  /* 각 패널 */
+  .s3-drawer-panel { flex: 1; overflow-y: auto; display: none; }
+  .s3-drawer-panel::-webkit-scrollbar { display: none; }
+  .s3-drawer-panel.active { display: block; }
+  #dpanel-like.active { display: flex !important; flex-direction: column; overflow: hidden; }
+  /* 드로어 아이템 */
+  .s3-drawer-item { display: flex; align-items: center; gap: 12px; padding: 9px 18px; cursor: pointer; }
+  .s3-drawer-art {
+    width: 56px; height: 56px; border-radius: 10px; overflow: hidden;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  }
+  .s3-drawer-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s3-drawer-info { flex: 1; min-width: 0; }
+  .s3-drawer-name { font-size: 15px; font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s3-drawer-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .s3-drawer-play { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.6); display: flex; padding: 6px; flex-shrink: 0; }
+  /* 좋아요 세로 메뉴 */
+  .s3-like-menu { display: flex; flex-direction: column; overflow-y: auto; flex: 1; }
+  .s3-like-menu::-webkit-scrollbar { display: none; }
+  .s3-like-menu-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: none; border-left: none; border-right: none; border-top: none;
+    cursor: pointer; font-family: inherit; width: 100;
+  }
+  .s3-like-menu-label { font-size: 16px; font-weight: 600; color: white; }
+  .s3-like-menu-chevron { color: rgba(255,255,255,0.4); display: flex; }
+  /* 서브패널 */
+  .s3-like-subpanel { display: none; overflow-y: auto; flex: 1; }
+  .s3-like-subpanel::-webkit-scrollbar { display: none; }
+  .s3-like-subpanel.active { display: block; }
+  /* 서브패널 헤더 (뒤로가기) */
+  .s3-like-subheader {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px 6px; flex-shrink: 0;
+  }
+  .s3-like-back {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.75); display: flex; align-items: center;
+    gap: 4px; font-size: 14px; font-weight: 600; font-family: inherit; padding: 4px 0;
+  }
+
+  /* ════ 화면 4: 앨범 상세 ════ */
+  #screen4 {
+    position: absolute; inset: 0; z-index: 20;
+    background: #0d0d0d;
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(.32,.72,0,1);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  #screen4.slide-up { transform: translateY(0); }
+
+  .s4-statusbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px 4px; flex-shrink: 0;
+  }
+  .s4-statusbar .status-time { font-size: 14px; font-weight: 700; color: white; }
+
+  .s4-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 4px 14px 8px; flex-shrink: 0;
+  }
+  .s4-back { background: none; border: none; cursor: pointer; color: white; display: flex; padding: 4px; }
+  .s4-title { font-size: 17px; font-weight: 700; color: white; }
+  .s4-dots { background: none; border: none; cursor: pointer; color: white; display: flex; padding: 4px; }
+
+  /* 스크롤 가능한 중간 영역 */
+  .s4-scroll { flex: 1; overflow-y: auto; }
+  .s4-scroll::-webkit-scrollbar { display: none; }
+
+  /* 앨범 커버 */
+  .s4-album-cover {
+    width: 180px; height: 180px; border-radius: 14px; overflow: hidden;
+    margin: 6px auto 12px; background: linear-gradient(135deg,#8B2252,#C05080);
+    flex-shrink: 0;
+  }
+  .s4-album-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s4-album-name {
+    text-align: center; font-size: 20px; font-weight: 800; color: white;
+    padding: 0 20px 6px; letter-spacing: -0.3px;
+  }
+
+  .s4-artist-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 4px 20px 10px;
+  }
+  .s4-artist-thumb {
+    width: 32px; height: 32px; border-radius: 50%; overflow: hidden;
+    background: linear-gradient(135deg,#8B2252,#C05080); flex-shrink: 0;
+  }
+  .s4-artist-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s4-artist-name { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 500; }
+
+  .s4-stats-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 0 20px 14px;
+  }
+  .s4-stat { display: flex; align-items: center; gap: 5px; font-size: 14px; color: rgba(255,255,255,0.7); }
+  .s4-share { margin-left: auto; background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; }
+
+  .s4-action-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 16px 14px;
+  }
+  .s4-action-btn {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+    background: #1e1e1e; border: none; border-radius: 10px;
+    color: white; font-size: 14px; font-weight: 600; font-family: inherit;
+    padding: 12px 6px; cursor: pointer;
+  }
+  .s4-mixup-icon {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: conic-gradient(#7b2ff7, #2196f3, #00e5ff, #7b2ff7);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+
+  .s4-list-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 4px 20px 8px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .s4-select-all { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); background: none; border: none; cursor: pointer; font-family: inherit; }
+  .s4-track-count { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+  .s4-track-list { padding: 0 16px; }
+
+  /* 앨범 소개 */
+  .s4-album-intro {
+    padding: 22px 20px 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 8px;
+  }
+  .s4-intro-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+  }
+  .s4-intro-title { font-size: 18px; font-weight: 800; color: white; }
+  .s4-intro-more { font-size: 13px; color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer; font-family: inherit; }
+  .s4-intro-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+  .s4-intro-table tr td { padding: 4px 0; font-size: 13px; vertical-align: top; }
+  .s4-intro-table tr td:first-child { color: rgba(255,255,255,0.45); width: 52px; flex-shrink: 0; }
+  .s4-intro-table tr td:last-child { color: rgba(255,255,255,0.85); }
+  .s4-intro-desc {
+    font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  .s4-track-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .s4-num { font-size: 13px; color: rgba(255,255,255,0.35); width: 22px; text-align: center; flex-shrink: 0; }
+  .s4-track-info { flex: 1; min-width: 0; }
+  .s4-track-title-row { display: flex; align-items: center; gap: 6px; }
+  .s4-title-badge {
+    font-size: 9px; font-weight: 800; color: #18c748;
+    border: 1.5px solid #18c748; border-radius: 3px; padding: 1px 4px;
+    flex-shrink: 0; letter-spacing: 0.3px;
+  }
+  .s4-track-name { font-size: 15px; font-weight: 500; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s4-track-artist { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+  .s4-track-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+  .s4-track-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.6); display: flex; padding: 4px; }
+
+  .s4-mini-player {
+    flex-shrink: 0; background: #161616;
+    border-top: 2px solid #1db954;
+    padding: 10px 16px 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .s4-mini-info { flex: 1; min-width: 0; }
+  .s4-mini-title { font-size: 14px; font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s4-mini-artist { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+  .s4-mini-ctrl { display: flex; align-items: center; gap: 6px; }
+  .s4-mini-btn { background: none; border: none; cursor: pointer; color: white; display: flex; padding: 4px; }
+
+  .s4-bottom-nav {
+    flex-shrink: 0; display: flex; background: #0d0d0d;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 0 18px;
+  }
+  .s4-nav-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    padding: 4px 0; font-size: 10px; color: rgba(255,255,255,0.45);
+  }
+  .s4-nav-item.active { color: #1db954; }
+
+  /* ════ 더보기 모달 ════ */
+  #song-modal {
+    position: absolute; inset: 0; z-index: 50;
+    background: linear-gradient(to bottom, rgba(55,40,35,0.97) 0%, rgba(10,8,8,0.99) 100%);
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.28s ease;
+    overflow: hidden;
+  }
+  #song-modal.open { opacity: 1; pointer-events: all; }
+
+  .modal-status {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 22px 4px; color: white; flex-shrink: 0;
+  }
+  .modal-status-time { font-size: 16px; font-weight: 600; }
+
+  .modal-aac-badge {
+    display: flex; justify-content: center; padding: 4px 0 8px; flex-shrink: 0;
+  }
+  .aac-pill {
+    display: flex; align-items: center; gap: 5px;
+    border: 1.5px solid rgba(255,255,255,0.45); border-radius: 50px;
+    padding: 4px 14px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85);
+  }
+  .aac-wave { display: flex; align-items: flex-end; gap: 1.5px; }
+  .aac-wave span { display: block; width: 2.5px; background: rgba(255,255,255,0.8); border-radius: 2px; }
+
+  .modal-art {
+    width: 120px; height: 120px; border-radius: 10px; overflow: hidden;
+    margin: 0 auto 10px; background: #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); flex-shrink: 0;
+  }
+  .modal-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .modal-song-info { text-align: center; padding: 0 22px 10px; flex-shrink: 0; }
+  .modal-song-title { font-size: 17px; font-weight: 700; color: white; }
+  .modal-song-artist { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 3px; }
+
+  .modal-icons {
+    display: flex; align-items: flex-start; justify-content: center;
+    gap: 0; padding: 2px 10px 10px; flex-shrink: 0;
+  }
+  .modal-icon-btn {
+    background: none; border: none; cursor: pointer; color: white;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 4px 12px; font-size: 11px; color: rgba(255,255,255,0.8);
+    font-family: inherit;
+  }
+  .modal-icon-btn svg { display: block; }
+  .modal-heart-count { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+  .modal-mixup-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin: 0 22px 12px; padding: 11px 20px;
+    border: 1.5px solid rgba(255,255,255,0.2); border-radius: 50px;
+    background: transparent; color: white; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: inherit; flex-shrink: 0;
+  }
+  .mixup-icon {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: conic-gradient(#7b2ff7, #2196f3, #00e5ff, #7b2ff7);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+
+  .modal-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 0 0 4px; flex-shrink: 0; }
+
+  .modal-menu { flex: 1; padding: 0 22px; }
+  .modal-menu-item {
+    display: block; width: 100%; background: none; border: none;
+    text-align: left; padding: 13px 0;
+    font-size: 16px; font-weight: 500; color: white;
+    cursor: pointer; font-family: inherit;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .modal-menu-item:last-child { border-bottom: none; }
+  .modal-menu-item.disabled { color: rgba(255,255,255,0.3); cursor: default; }
+
+  .modal-close-bar { padding: 8px 22px 20px; flex-shrink: 0; }
+  .modal-close-btn {
+    display: block; width: 100%; background: none; border: none;
+    text-align: center; font-size: 17px; font-weight: 500;
+    color: rgba(255,255,255,0.85); cursor: pointer; font-family: inherit;
+    padding: 12px;
+  }
+
+  #screen0 { position: absolute; inset: 0; z-index: 15; background: #0d0d0d; transition: transform 0.42s cubic-bezier(.32,.72,0,1), opacity 0.32s; display: flex; flex-direction: column; overflow: hidden; }
+  #screen0.slide-out { transform: translateX(-100%); opacity: 0; }
+  .s0-content { height: 100%; display: flex; flex-direction: column; color: white; overflow: hidden; }
+  .s0-albums { display: flex; gap: 12px; padding: 8px 18px 4px; overflow-x: auto; flex-shrink: 0; }
+  .s0-albums::-webkit-scrollbar { display: none; }
+  .s0-album-item { flex-shrink: 0; width: 88px; cursor: pointer; }
+  .s0-album-thumb { width: 88px; height: 88px; border-radius: 10px; overflow: hidden; background: #333; margin-bottom: 4px; }
+  .s0-album-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s0-album-title { font-size: 11.5px; font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s0-album-artist { font-size: 11px; color: rgba(255,255,255,0.5); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s0-chart-header { padding: 10px 18px 4px; flex-shrink: 0; }
+  .s0-chart-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+  .s0-chart-title-row { display: flex; align-items: center; justify-content: space-between; }
+  .s0-chart-title { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 7px; }
+  .s0-chart-more { font-size: 12px; color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer; font-family: inherit; }
+  .s0-tabs { display: flex; gap: 8px; padding: 8px 18px 6px; flex-shrink: 0; overflow-x: auto; }
+  .s0-tabs::-webkit-scrollbar { display: none; }
+  .s0-tab { flex-shrink: 0; padding: 7px 16px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
+  .s0-tab.active { background: #18f915; border-color: #18f915; color: #000; }
+  .s0-songs { flex: 1; overflow-y: auto; padding: 0 14px; }
+  .s0-songs::-webkit-scrollbar { display: none; }
+  .s0-song-item { display: flex; align-items: center; gap: 10px; padding: 9px 4px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .s0-song-rank { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); width: 20px; text-align: center; flex-shrink: 0; }
+  .s0-song-art { width: 46px; height: 46px; border-radius: 8px; overflow: hidden; background: #333; flex-shrink: 0; }
+  .s0-song-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s0-song-info { flex: 1; min-width: 0; }
+  .s0-song-name { font-size: 14px; font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s0-song-artist { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .s0-song-play { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; padding: 6px; flex-shrink: 0; }
+  .s0-song-art2 { width: 46px; height: 46px; border-radius: 8px; overflow: hidden; background: #444; flex-shrink: 0; }
+  .s0-song-art2 img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .s0-song-item.highlight .s0-song-name { color: #18f915; }
+  .s0-song-item.highlight .s0-song-play { color: #18f915; }
+  .s0-play-all { margin: 8px 18px; padding: 14px; background: #1a1a1a; border: 1.5px solid rgba(255,255,255,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; color: white; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+  .s0-mini { display: flex; align-items: center; padding: 12px 18px; background: #161616; border-top: 1px solid rgba(255,255,255,0.08); gap: 10px; flex-shrink: 0; }
+  .s0-mini-info { flex: 1; min-width: 0; }
+  .s0-mini-title { font-size: 14px; font-weight: 600; color: white; }
+  .s0-mini-artist { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+  .s0-mini-ctrl { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+  .s0-mini-btn { background: none; border: none; cursor: pointer; color: white; display: flex; padding: 6px; }
+  .s0-bottom-nav { display: flex; background: #0d0d0d; border-top: 1px solid rgba(255,255,255,0.08); padding: 6px 0 20px; flex-shrink: 0; }
+  .s0-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; cursor: pointer; font-family: inherit; padding: 4px 0; font-size: 10px; color: rgba(255,255,255,0.45); }
+  .s0-nav-item.active { color: #18f915; }
+
+  /* ════ 설문 모달 ════ */
+  #survey-modal {
+    position: absolute; inset: 0; z-index: 9998;
+    background: #0d0d0d;
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+  }
+  #survey-modal.open { opacity: 1; pointer-events: all; }
+  .survey-header { padding: 20px 22px 10px; flex-shrink: 0; }
+  .survey-title { font-size: 20px; font-weight: 800; color: white; margin-bottom: 4px; }
+  .survey-sub { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .survey-body { flex: 1; padding: 10px 22px 20px; }
+  .survey-q { margin-bottom: 22px; }
+  .survey-q-label { font-size: 14px; font-weight: 600; color: white; margin-bottom: 10px; line-height: 1.5; }
+  .survey-q-badge { display: inline-block; font-size: 11px; font-weight: 700; color: #18f915; border: 1.5px solid #18f915; border-radius: 20px; padding: 1px 8px; margin-bottom: 6px; }
+  .survey-scale { display: flex; gap: 8px; }
+  .survey-scale-btn {
+    flex: 1; padding: 10px 4px; border-radius: 10px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    background: transparent; color: rgba(255,255,255,0.6);
+    font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .survey-scale-btn.selected { background: #18f915; border-color: #18f915; color: #000; }
+  .survey-scale-label { display: flex; justify-content: space-between; margin-top: 4px; font-size: 10px; color: rgba(255,255,255,0.4); }
+  .survey-submit {
+    margin: 0 22px 30px; padding: 15px;
+    background: #18f915; border: none; border-radius: 14px;
+    color: #000; font-size: 16px; font-weight: 800;
+    cursor: pointer; font-family: inherit; flex-shrink: 0;
+  }
+  .survey-submit:disabled { background: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); cursor: not-allowed; }
+  .survey-done { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 16px; padding: 40px; text-align: center; }
+  .survey-done-icon { font-size: 48px; }
+  .survey-done-title { font-size: 22px; font-weight: 800; color: white; }
+  .survey-done-sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* ════ 과업 지시 오버레이 ════ */
+  #task-overlay {
+    position: absolute; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.92);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 32px 28px; text-align: center;
+    transition: opacity 0.3s;
+  }
+  #task-overlay.hidden { display: none; }
+  .task-badge { font-size: 12px; font-weight: 700; color: #18f915; border: 1.5px solid #18f915; border-radius: 20px; padding: 3px 12px; margin-bottom: 20px; }
+  .task-title { font-size: 17px; font-weight: 800; color: white; line-height: 1.6; margin-bottom: 12px; }
+  .task-time-hint { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+  .task-start-btn { background: #18f915; border: none; border-radius: 14px; color: #000; font-size: 16px; font-weight: 800; padding: 14px 48px; cursor: pointer; font-family: inherit; }
+
+  /* ════ 카운트다운 강조 ════ */
+  .status-time.countdown-warn { color: #ff4444 !important; font-weight: 800; }
+
+  /* ════ 설문 모달 리셋 (2문항 버전) ════ */
+  #survey-modal {
+    position: absolute; inset: 0; z-index: 70;
+    background: #0d0d0d;
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+  }
+  #survey-modal.open { opacity: 1; pointer-events: all; }
+  .survey-header { padding: 32px 22px 12px; }
+  .survey-title { font-size: 20px; font-weight: 800; color: white; margin-bottom: 4px; }
+  .survey-sub { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .survey-body { flex: 1; padding: 16px 22px 20px; }
+  .survey-q { margin-bottom: 28px; }
+  .survey-q-label { font-size: 15px; font-weight: 600; color: white; margin-bottom: 12px; line-height: 1.5; }
+  .survey-q-badge { display: inline-block; font-size: 11px; font-weight: 700; color: #18f915; border: 1.5px solid #18f915; border-radius: 20px; padding: 1px 8px; margin-bottom: 8px; }
+  .survey-scale { display: flex; gap: 8px; }
+  .survey-scale-btn { flex: 1; padding: 14px 4px; border-radius: 10px; border: 1.5px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.6); font-size: 16px; font-weight: 700; font-family: inherit; cursor: pointer; transition: all 0.15s; }
+  .survey-scale-btn.selected { background: #18f915; border-color: #18f915; color: #000; }
+  .survey-scale-label { display: flex; justify-content: space-between; margin-top: 4px; font-size: 10px; color: rgba(255,255,255,0.4); }
+  .survey-submit { margin: 0 22px 40px; padding: 16px; background: #18f915; border: none; border-radius: 14px; color: #000; font-size: 16px; font-weight: 800; cursor: pointer; font-family: inherit; }
+  .survey-submit:disabled { background: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); cursor: not-allowed; }
+  .survey-done { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 16px; padding: 40px; text-align: center; }
+  .survey-done-icon { font-size: 48px; }
+  .survey-done-title { font-size: 22px; font-weight: 800; color: white; }
+  .survey-done-sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* ════ 과업2 설문 결과 메시지 ════ */
+  .survey-result-msg { font-size: 22px; font-weight: 800; color: white; text-align: center; margin-bottom: 8px; }
+  .survey-result-sub { font-size: 13px; color: rgba(255,255,255,0.5); text-align: center; margin-bottom: 28px; }
+
+  /* ════ 과업2 설문 모달 ════ */
+  #survey2-modal {
+    position: absolute; inset: 0; z-index: 9997;
+    background: #0d0d0d;
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+  }
+  #survey2-modal.open { opacity: 1; pointer-events: all; }
+
+  /* ════ 과업2 지시 오버레이 ════ */
+  #task2-overlay {
+    position: absolute; inset: 0; z-index: 9996;
+    background: rgba(0,0,0,0.92);
+    display: none;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 32px 28px; text-align: center;
+  }
+  #task2-overlay.show { display: flex; }
+
+  /* ════ 찾았어요 토스트 ════ */
+  #success-toast {
+    position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+    z-index: 9995; background: #18f915; color: #000;
+    font-size: 15px; font-weight: 800; padding: 10px 24px;
+    border-radius: 30px; white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  #success-toast.show { opacity: 1; }
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="phone">
+  <!-- screen0: 홈/차트 -->
+  <div id="screen0">
+    <div class="s0-content">
+      <div class="status-bar"><span class="status-time">6:49</span><div class="status-right"><div class="sig-bars"><span style="height:4px"></span><span style="height:7px"></span><span style="height:10px"></span><span style="height:13px"></span></div><span class="s5g">5G</span><div class="batt"><div class="batt-body"><div class="batt-fill"></div></div><span class="batt-pct">70</span></div></div></div>
+      <div class="s0-albums">
+        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art0-wrap" style="background:linear-gradient(135deg,#c84060,#601030)"><img id="h-art0" src="" style="display:none" alt=""></div><div class="s0-album-title">BUMPA</div><div class="s0-album-artist">비비 (BIBI)</div></div>
+        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art1-wrap" style="background:linear-gradient(135deg,#6080c0,#202060)"><img id="h-art1" src="" style="display:none" alt=""></div><div class="s0-album-title">괜찮아 사랑이니까</div><div class="s0-album-artist">PLAVE</div></div>
+        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art2-wrap" style="background:linear-gradient(135deg,#0080c0,#001040)"><img id="h-art2" src="" style="display:none" alt=""></div><div class="s0-album-title">HYPER LINK: Vol.2</div><div class="s0-album-artist">DXMON (다이몬)</div></div>
+        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art3-wrap" style="background:linear-gradient(135deg,#e0a040,#804010)"><img id="h-art3" src="" style="display:none" alt=""></div><div class="s0-album-title">오로라</div><div class="s0-album-artist">박현규</div></div>
+      </div>
+      <div class="s0-chart-header">
+        <div class="s0-chart-label">오늘 18:00 기준</div>
+        <div class="s0-chart-title-row"><div class="s0-chart-title">멜론차트 <svg width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="10" width="3" height="10" rx="1" fill="#18f915"/><rect x="7" y="6" width="3" height="14" rx="1" fill="#18f915"/><rect x="12" y="2" width="3" height="18" rx="1" fill="#18f915"/><rect x="17" y="8" width="3" height="12" rx="1" fill="#18f915"/></svg></div><button class="s0-chart-more">전체보기</button></div>
+      </div>
+      <div class="s0-tabs"><button class="s0-tab active">TOP100</button><button class="s0-tab">HOT100</button><button class="s0-tab">1995년 해외</button><button class="s0-tab">달달한</button></div>
+      <div class="s0-songs">
+        <div class="s0-song-item"><span class="s0-song-rank">9</span><div class="s0-song-art" id="s0-sart0-wrap" style="background:linear-gradient(135deg,#2060a0,#081030)"><img id="s0-sart0" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">Drowning</div><div class="s0-song-artist">— WOODZ</div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#2060a0,#081030)"></div></div>
+        <div class="s0-song-item highlight"><span class="s0-song-rank">10</span><div class="s0-song-art" id="s0-sart1-wrap" style="background:linear-gradient(135deg,#8B2252,#C05080)"><img id="s0-sart1" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">404 (New Era)</div><div class="s0-song-artist">— KiiiKiii (키키)</div></div><button class="s0-song-play" onclick="goToPlayer()"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" id="s0-sart1b-wrap" style="background:linear-gradient(135deg,#8B2252,#C05080)"><img id="s0-sart1b" src="" style="display:none" alt=""></div></div>
+        <div class="s0-song-item"><span class="s0-song-rank">11</span><div class="s0-song-art" id="s0-sart2-wrap" style="background:linear-gradient(135deg,#e04060,#600020)"><img id="s0-sart2" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">Heavy Serenade</div><div class="s0-song-artist">— NMIXX</div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#e04060,#600020)"></div></div>
+        <div class="s0-song-item"><span class="s0-song-rank">12</span><div class="s0-song-art" id="s0-sart3-wrap" style="background:linear-gradient(135deg,#80c060,#204010)"><img id="s0-sart3" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">0+0</div><div class="s0-song-artist">— 한로로</div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#80c060,#204010)"></div></div>
+      </div>
+      <button class="s0-play-all"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg> TOP100 전체듣기</button>
+      <div class="s0-mini">
+        <div class="s0-mini-info"><div class="s0-mini-title">404 (New Era)</div><div class="s0-mini-artist">KiiiKiii (키키)</div></div>
+        <div class="s0-mini-ctrl">
+          <button class="s0-mini-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <button class="s0-mini-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          <button class="s0-mini-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <button class="s0-mini-btn" onclick="goToPlayer()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/><polygon points="17 17 21 19 17 21" fill="white" stroke="none"/></svg></button>
+        </div>
+      </div>
+      <div class="s0-bottom-nav">
+        <button class="s0-nav-item active"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>홈</button>
+        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 8v-4"/><path d="M12 20v-4"/><path d="M8.5 8.5L5.5 5.5"/><path d="M18.5 18.5L15.5 15.5"/></svg>ForYou</button>
+        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>탐색</button>
+        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>음악서랍</button>
+        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>바로가기</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ══ 화면 1: 플레이어 ══ -->
+  <div id="screen1">
+    <div class="bg-layer"><div class="bg-blur-orb"></div><div class="bg-grad"></div></div>
+    <div class="s1-content">
+      <div class="status-bar">
+        <span class="status-time">6:48</span>
+        <div class="status-right">
+          <div class="sig-bars"><span style="height:4px"></span><span style="height:7px"></span><span style="height:10px"></span><span style="height:13px"></span></div>
+          <span class="s5g">5G</span>
+          <div class="batt"><div class="batt-body"><div class="batt-fill"></div></div><span class="batt-pct">71</span></div>
+        </div>
+      </div>
+      <div class="song-header">
+        <div class="song-header-row">
+          <div>
+            <div class="song-title">404 (New Era)</div>
+            <div class="song-artist">kiikii (키키)</div>
+          </div>
+          <div class="hdr-icons">
+            <button class="icon-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+            <button class="icon-btn" onclick="backToHome()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="album-art">
+        <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="앨범 커버"
+             onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#8B2252,#C05080,#E8A0B0,#4A1A3A)'">
+      </div>
+      <div class="action-btns">
+        <button class="btn-pill btn-heart" id="btnHeart" onclick="toggleHeart()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path class="heart-path" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          65,281
+        </button>
+        <button class="btn-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          담기
+        </button>
+        <button class="btn-pill btn-mixup" id="btnMixup" onclick="goToMixup()">
+          <svg width="14" height="14" viewBox="0 0 24 24"><polygon class="mixup-tri" points="5 3 19 12 5 21 5 3"/></svg>
+          믹스업
+        </button>
+      </div>
+      <div class="lyrics">
+        <p>404 Not Found in the system</p>
+        <p>404 The new era era</p>
+      </div>
+      <div class="progress">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="prog-times"><span>0:43</span><span>3:00</span></div>
+      </div>
+      <div class="player-ctrl">
+        <button class="ctrl-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></button>
+        <button class="ctrl-btn"><svg width="32" height="32" viewBox="0 0 24 24" fill="white"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="ctrl-btn play"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <button class="ctrl-btn"><svg width="32" height="32" viewBox="0 0 24 24" fill="white"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="ctrl-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></button>
+      </div>
+      <div class="bottom-nav">
+        <button class="nav-btn"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="10" width="2" height="10" rx="1"/><rect x="6" y="6" width="2" height="14" rx="1"/><rect x="10" y="2" width="2" height="18" rx="1"/><rect x="14" y="8" width="2" height="12" rx="1"/><rect x="18" y="5" width="2" height="15" rx="1"/></svg></button>
+        <button class="nav-btn"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 8v-4"/><path d="M12 20v-4"/><path d="M8.5 8.5L5.5 5.5"/><path d="M18.5 18.5L15.5 15.5"/><path d="M8 12H4"/><path d="M20 12h-4"/><path d="M8.5 15.5L5.5 18.5"/><path d="M18.5 5.5L15.5 8.5"/></svg></button>
+        <button class="nav-btn" onclick="goToPlaylist()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/><polygon points="17 17 21 19 17 21" fill="currentColor" stroke="none"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 믹스업 오버레이 (화면1 위에 뜨는 바텀시트) ══ -->
+  <div id="mixup-overlay">
+    <div class="bottom-sheet">
+      <div class="sheet-handle" onclick="closeMixupSheet()" style="cursor:pointer;"></div>
+      <div class="sheet-header">
+        <div class="sheet-title-group">
+          <span class="sheet-title">Mixup Picks</span>
+          <span class="smart-badge">Smart</span>
+        </div>
+        <button class="sheet-refresh" onclick="refreshMixup()">
+          <svg class="refresh-icon" id="refreshIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          새로고침
+        </button>
+      </div>
+      <div class="sheet-sub">
+        현재 듣는 흐름 기반 추천
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="track-list" id="mixup-track-list"></div>
+      <button class="add-playlist-btn" onclick="goToPlaylist()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/><polygon points="17 17 21 19 17 21" fill="white" stroke="none"/></svg>
+        재생목록에 담기
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ 화면 2: Mixup Picks ══ -->
+  <div id="screen2">
+    <div class="bg-layer"><div class="bg-blur-orb"></div><div class="bg-grad"></div></div>
+    <div class="s2-content">
+      <div class="status-bar">
+        <span class="status-time">6:48</span>
+        <div class="status-right">
+          <div class="sig-bars"><span style="height:4px"></span><span style="height:7px"></span><span style="height:10px"></span><span style="height:13px"></span></div>
+          <span class="s5g">5G</span>
+          <div class="batt"><div class="batt-body"><div class="batt-fill"></div></div><span class="batt-pct">71</span></div>
+        </div>
+      </div>
+      <div class="s2-now"><span class="s2-now-border">현재 재생</span></div>
+      <div class="s2-song-row">
+        <button class="s2-dots" onclick="openModal()"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+        <div class="s2-song-info">
+          <div class="s2-title">404 (New Era)</div>
+          <div class="s2-artist">kiikii (키키)</div>
+        </div>
+        <button class="s2-chevron" onclick="goToAlbum()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+      </div>
+      <div class="s2-album">
+        <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="앨범 커버"
+             onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#8B2252,#C05080,#E8A0B0,#4A1A3A)'">
+      </div>
+      <div class="s2-mid">
+        <div class="s2-action-btns">
+          <button class="btn-pill btn-heart" id="btnHeart2" onclick="toggleHeart()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path class="heart-path" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            65,281
+          </button>
+          <button class="btn-pill">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            담기
+          </button>
+          <button class="btn-pill btn-mixup active" id="s2BtnMixup" onclick="toggleSheet()">
+            <svg width="14" height="14" viewBox="0 0 24 24"><polygon class="mixup-tri" points="5 3 19 12 5 21 5 3"/></svg>
+            믹스업
+          </button>
+        </div>
+        <div class="s2-prog">
+          <div class="s2-prog-track"><div class="s2-prog-fill"></div></div>
+          <div class="s2-prog-times"><span>0:43</span><span>3:00</span></div>
+        </div>
+      </div>
+
+      <!-- 바텀 시트 -->
+      <div class="bottom-sheet">
+        <div class="sheet-handle" onclick="collapseSheet()" style="cursor:pointer;"></div>
+        <div class="sheet-header">
+          <div class="sheet-title-group">
+            <span class="sheet-title">Mixup Picks</span>
+            <span class="smart-badge">Smart</span>
+          </div>
+          <button class="sheet-refresh">
+            <svg class="refresh-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            새로고침
+          </button>
+        </div>
+        <div class="sheet-sub">
+          현재 듣는 흐름 기반 추천
+        </div>
+        <div class="track-list"></div>
+        <button class="add-playlist-btn">재생목록에 담기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 화면 3: 재생목록 ══ -->
+  <div id="screen3">
+    <div class="bg-layer"><div class="bg-blur-orb"></div><div class="bg-grad"></div></div>
+    <div class="s3-content">
+      <div class="status-bar">
+        <span class="status-time">6:48</span>
+        <div class="status-right">
+          <div class="sig-bars"><span style="height:4px"></span><span style="height:7px"></span><span style="height:10px"></span><span style="height:13px"></span></div>
+          <span class="s5g">5G</span>
+          <div class="batt"><div class="batt-body"><div class="batt-fill"></div></div><span class="batt-pct">71</span></div>
+        </div>
+      </div>
+
+      <!-- 이전 버튼 -->
+      <div class="s3-topbar">
+        <button class="s3-back-btn" onclick="backToMixup()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          이전
+        </button>
+      </div>
+
+      <!-- 상단 탭 -->
+      <div class="s3-tabs">
+        <div class="s3-tab-group">
+          <button class="s3-tab active" id="tabPlaylist" onclick="showS3Tab('playlist')">재생목록</button>
+          <button class="s3-tab" id="tabDrawer" onclick="showS3Tab('drawer')">음악서랍</button>
+        </div>
+        <div class="s3-tab-icons">
+          <button class="s3-tab-icon-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          <button class="s3-tab-icon-btn" onclick="backToMixup()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 재생목록 패널 -->
+      <div class="s3-playlist-content" id="s3-playlist-tab">
+        <!-- 빈 상태 -->
+        <div class="s3-empty" id="s3-empty">
+          <svg class="s3-empty-icon" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="15" y2="18"/>
+            <polygon points="17 17 21 19 17 21" fill="white" stroke="none"/>
+          </svg>
+          <p>아직 추가된 곡이 없어요<br>Mixup Picks에서 + 버튼을 눌러<br>곡을 추가해보세요</p>
+        </div>
+        <!-- 추가된 곡 목록 -->
+        <div class="s3-list" id="s3-list" style="display:none;"></div>
+        <div class="s3-footer" id="s3-footer" style="display:none;">
+          <button class="s3-play-all">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="black"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            전체 재생
+          </button>
+          <span class="s3-count-label" id="s3-footer-count"></span>
+        </div>
+      </div>
+
+      <!-- 음악서랍 패널 -->
+      <div class="s3-drawer-content" id="s3-drawer-tab">
+        <!-- 가로 필터 탭 -->
+        <div class="s3-drawer-filter-bar">
+          <button class="s3-drawer-filter-btn active" id="dfilter-playlist" onclick="showDrawerFilter('playlist')">플레이리스트</button>
+          <button class="s3-drawer-filter-btn" id="dfilter-like" onclick="showDrawerFilter('like')">좋아요</button>
+          <button class="s3-drawer-filter-btn" id="dfilter-recent" onclick="showDrawerFilter('recent')">최근들은</button>
+        </div>
+
+        <!-- 플레이리스트 패널 -->
+        <div class="s3-drawer-panel active" id="dpanel-playlist">
+          <div class="s3-drawer-item" id="liked-songs-item" onclick="completeTask2()" style="cursor:pointer;">
+            <div class="s3-drawer-art" id="pinnedArt" style="background:linear-gradient(135deg,#8B2252,#C05080);">
+              <img id="pinnedImg" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+            </div>
+            <div class="s3-drawer-info">
+              <div class="s3-drawer-name">좋아요 표시한 곡</div>
+              <div class="s3-drawer-sub" style="display:flex;align-items:center;gap:4px;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="#18f915"><path d="M17 4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v1l1.5 5.5L8 12h3v8l1 2 1-2v-8h3l-.5-1.5L17 5V4z"/></svg>
+                34곡
+              </div>
+            </div>
+            <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          </div>
+        </div>
+
+        <!-- 좋아요 패널 -->
+        <div class="s3-drawer-panel" id="dpanel-like">
+          <!-- 세로 메뉴: 앨범 / 아티스트 / 곡 -->
+          <div class="s3-like-menu" id="like-menu">
+            <button class="s3-like-menu-row" onclick="showLikeSub('album')">
+              <span class="s3-like-menu-label">앨범</span>
+              <span class="s3-like-menu-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </button>
+            <button class="s3-like-menu-row" onclick="showLikeSub('artist')">
+              <span class="s3-like-menu-label">아티스트</span>
+              <span class="s3-like-menu-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </button>
+            <button class="s3-like-menu-row" onclick="showLikeSub('song')">
+              <span class="s3-like-menu-label">곡</span>
+              <span class="s3-like-menu-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </button>
+          </div>
+
+          <!-- 앨범 서브패널 -->
+          <div class="s3-like-subpanel" id="lsubpanel-album">
+            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>앨범</button></div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" id="likeArt1" style="background:linear-gradient(135deg,#8B2252,#C05080);border-radius:6px;">
+                <img id="likeImg1" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">Delulu Pack</div><div class="s3-drawer-sub">KiiiKiii (키키) · 6곡</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" id="likeArt2" style="background:linear-gradient(135deg,#d4a0c0,#8b4060);border-radius:6px;">
+                <img id="likeImg2" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">ILLIT 1st Mini Album</div><div class="s3-drawer-sub">ILLIT · 5곡</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" id="likeArt3" style="background:linear-gradient(135deg,#40a0e0,#102060);border-radius:6px;">
+                <img id="likeImg3" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">ELEVEN</div><div class="s3-drawer-sub">IVE · 1곡</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+          </div>
+
+          <!-- 아티스트 서브패널 -->
+          <div class="s3-like-subpanel" id="lsubpanel-artist">
+            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>아티스트</button></div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" style="background:linear-gradient(135deg,#8B2252,#C05080);border-radius:50%;">
+                <img id="likeArtistImg1" src="" style="width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">KiiiKiii (키키)</div><div class="s3-drawer-sub">아티스트</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" style="background:linear-gradient(135deg,#d4a0c0,#8b4060);border-radius:50%;">
+                <img id="likeArtistImg2" src="" style="width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">ILLIT</div><div class="s3-drawer-sub">아티스트</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" style="background:linear-gradient(135deg,#6040e0,#100050);border-radius:50%;">
+                <img id="likeArtistImg3" src="" style="width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">aespa</div><div class="s3-drawer-sub">아티스트</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" style="background:linear-gradient(135deg,#40a0e0,#102060);border-radius:50%;">
+                <img id="likeArtistImg4" src="" style="width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">IVE</div><div class="s3-drawer-sub">아티스트</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+          </div>
+
+          <!-- 곡 서브패널 -->
+          <div class="s3-like-subpanel" id="lsubpanel-song">
+            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>곡</button></div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" id="likeArt4" style="background:linear-gradient(135deg,#8B2252,#C05080);">
+                <img id="likeImg4" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">404 (New Era)</div><div class="s3-drawer-sub">KiiiKiii (키키)</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" id="likeArt5" style="background:linear-gradient(135deg,#d4a0c0,#8b4060);">
+                <img id="likeImg5" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">Magnetic</div><div class="s3-drawer-sub">ILLIT</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" id="likeArt6" style="background:linear-gradient(135deg,#40a0e0,#102060);">
+                <img id="likeImg6" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">LOVE DIVE</div><div class="s3-drawer-sub">IVE</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" id="likeArt7" style="background:linear-gradient(135deg,#e0c040,#804010);">
+                <img id="likeImg7" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">Queencard</div><div class="s3-drawer-sub">(G)I-DLE</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+            <div class="s3-drawer-item">
+              <div class="s3-drawer-art" id="likeArt8" style="background:linear-gradient(135deg,#80c0e0,#204060);">
+                <img id="likeImg8" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+              </div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">Ditto</div><div class="s3-drawer-sub">NewJeans</div></div>
+              <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 최근들은 패널 -->
+        <div class="s3-drawer-panel" id="dpanel-recent">
+          <div class="s3-drawer-item">
+            <div class="s3-drawer-art" id="recentArt1" style="background:linear-gradient(135deg,#6040e0,#100050);">
+              <img id="recentImg1" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+            </div>
+            <div class="s3-drawer-info"><div class="s3-drawer-name">Supernova</div><div class="s3-drawer-sub">aespa</div></div>
+            <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          </div>
+          <div class="s3-drawer-item">
+            <div class="s3-drawer-art" id="recentArt2" style="background:linear-gradient(135deg,#e8c080,#a04010);">
+              <img id="recentImg2" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+            </div>
+            <div class="s3-drawer-info"><div class="s3-drawer-name">Hype Boy</div><div class="s3-drawer-sub">NewJeans</div></div>
+            <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          </div>
+          <div class="s3-drawer-item">
+            <div class="s3-drawer-art" id="recentArt3" style="background:linear-gradient(135deg,#8020c0,#300850);">
+              <img id="recentImg3" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+            </div>
+            <div class="s3-drawer-info"><div class="s3-drawer-name">Spicy</div><div class="s3-drawer-sub">aespa</div></div>
+            <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          </div>
+          <div class="s3-drawer-item">
+            <div class="s3-drawer-art" id="recentArt4" style="background:linear-gradient(135deg,#1a2a6c,#b21f1f);">
+              <img id="recentImg4" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+            </div>
+            <div class="s3-drawer-info"><div class="s3-drawer-name">Blue Flame</div><div class="s3-drawer-sub">LE SSERAFIM</div></div>
+            <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          </div>
+          <div class="s3-drawer-item">
+            <div class="s3-drawer-art" id="recentArt5" style="background:linear-gradient(135deg,#e060a0,#600040);">
+              <img id="recentImg5" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+            </div>
+            <div class="s3-drawer-info"><div class="s3-drawer-name">After LIKE</div><div class="s3-drawer-sub">IVE</div></div>
+            <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══ 화면 4: 앨범 상세 (Delulu Pack) ══ -->
+  <div id="screen4">
+    <!-- 상태바 -->
+    <div class="s4-statusbar">
+      <span class="status-time">6:48</span>
+      <div class="status-right">
+        <div class="sig-bars"><span style="height:4px"></span><span style="height:7px"></span><span style="height:10px"></span><span style="height:13px"></span></div>
+        <span class="s5g">5G</span>
+        <div class="batt"><div class="batt-body"><div class="batt-fill"></div></div><span class="batt-pct">71</span></div>
+      </div>
+    </div>
+
+    <!-- 상단 바 -->
+    <div class="s4-topbar">
+      <button class="s4-back" onclick="backFromAlbum()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <span class="s4-title">Delulu Pack</span>
+      <button class="s4-dots">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+      </button>
+    </div>
+
+    <!-- 스크롤 가능한 콘텐츠 -->
+    <div class="s4-scroll">
+
+    <!-- 앨범 커버 -->
+    <div class="s4-album-cover">
+      <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="Delulu Pack"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#8B2252,#C05080,#E8A0B0,#4A1A3A)'">
+    </div>
+    <!-- 앨범 제목 -->
+    <div class="s4-album-name">Delulu Pack</div>
+
+    <!-- 아티스트 행 -->
+    <div class="s4-artist-row">
+      <div class="s4-artist-thumb">
+        <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt=""
+             onerror="this.style.display='none'">
+      </div>
+      <span class="s4-artist-name">KiiiKiii (키키)</span>
+    </div>
+
+    <!-- 통계 행 -->
+    <div class="s4-stats-row">
+      <div class="s4-stat">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        7,546
+      </div>
+      <div class="s4-stat">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        3,840
+      </div>
+      <button class="s4-share">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </button>
+    </div>
+
+    <!-- 액션 버튼 행 -->
+    <div class="s4-action-row">
+      <button class="s4-action-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        전체
+      </button>
+      <button class="s4-action-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+        셔플
+      </button>
+      <button class="s4-action-btn" onclick="backFromAlbum(); goToMixup();">
+        <div class="s4-mixup-icon">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        믹스업
+      </button>
+    </div>
+
+    <!-- 트랙 헤더 -->
+    <div class="s4-list-header">
+      <button class="s4-select-all">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        전체선택
+      </button>
+      <span class="s4-track-count">6곡 · 17분 16초</span>
+    </div>
+
+    <!-- 트랙 목록 -->
+    <div class="s4-track-list">
+      <!-- 01 -->
+      <div class="s4-track-item">
+        <span class="s4-num">01</span>
+        <div class="s4-track-info">
+          <div class="s4-track-title-row"><span class="s4-track-name">Delulu</span></div>
+          <div class="s4-track-artist">KiiiKiii (키키)</div>
+        </div>
+        <div class="s4-track-actions">
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+        </div>
+      </div>
+      <!-- 02 TITLE -->
+      <div class="s4-track-item">
+        <span class="s4-num">02</span>
+        <div class="s4-track-info">
+          <div class="s4-track-title-row">
+            <span class="s4-title-badge">TITLE</span>
+            <span class="s4-track-name">404 (New Era)</span>
+          </div>
+          <div class="s4-track-artist">KiiiKiii (키키)</div>
+        </div>
+        <div class="s4-track-actions">
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+        </div>
+      </div>
+      <!-- 03 -->
+      <div class="s4-track-item">
+        <span class="s4-num">03</span>
+        <div class="s4-track-info">
+          <div class="s4-track-title-row"><span class="s4-track-name">UNDERDOGS</span></div>
+          <div class="s4-track-artist">KiiiKiii (키키)</div>
+        </div>
+        <div class="s4-track-actions">
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+        </div>
+      </div>
+      <!-- 04 -->
+      <div class="s4-track-item">
+        <span class="s4-num">04</span>
+        <div class="s4-track-info">
+          <div class="s4-track-title-row"><span class="s4-track-name">명냥</span></div>
+          <div class="s4-track-artist">KiiiKiii (키키)</div>
+        </div>
+        <div class="s4-track-actions">
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+        </div>
+      </div>
+      <!-- 05 -->
+      <div class="s4-track-item">
+        <span class="s4-num">05</span>
+        <div class="s4-track-info">
+          <div class="s4-track-title-row"><span class="s4-track-name">Dizzy</span></div>
+          <div class="s4-track-artist">KiiiKiii (키키)</div>
+        </div>
+        <div class="s4-track-actions">
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+        </div>
+      </div>
+      <!-- 06 -->
+      <div class="s4-track-item">
+        <span class="s4-num">06</span>
+        <div class="s4-track-info">
+          <div class="s4-track-title-row"><span class="s4-track-name">To Me From Me (Prod.TABLO)</span></div>
+          <div class="s4-track-artist">KiiiKiii (키키)</div>
+        </div>
+        <div class="s4-track-actions">
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+        </div>
+      </div>
+    </div><!-- /s4-track-list -->
+
+    <!-- 앨범 소개 -->
+    <div class="s4-album-intro">
+      <div class="s4-intro-header">
+        <span class="s4-intro-title">앨범 소개</span>
+        <button class="s4-intro-more">전체보기</button>
+      </div>
+      <table class="s4-intro-table">
+        <tr><td>유형</td><td>미니</td></tr>
+        <tr><td>장르</td><td>팝/댄스</td></tr>
+        <tr><td>발매일</td><td>2024.01.15</td></tr>
+        <tr><td>발매사</td><td>HYBE</td></tr>
+        <tr><td>기획사</td><td>Big Hit Music</td></tr>
+      </table>
+      <div class="s4-intro-desc">Delulu Pack [Credit] 01. DeluluComposed by KiiiKiii, TABLOArranged by TABLOLyrics by KiiiKiii, TABLO 02. 404 (New Era)Composed by KiiiKiii, Matt AlexArranged by Matt AlexLyrics by KiiiKiii 03. UNDERDOGSComposed by KiiiKiii, Yelin ParkArranged by Yelin ParkLyrics by KiiiKiii, Raf Sandou 04. 명냥Composed by KiiiKiii, Sean KimArranged by Sean KimLyrics by KiiiKiii...</div>
+    </div>
+
+    </div><!-- /s4-scroll -->
+
+    <!-- 미니 플레이어 -->
+    <div class="s4-mini-player">
+      <div class="s4-mini-info">
+        <div class="s4-mini-title">404 (New Era)</div>
+        <div class="s4-mini-artist">KiiiKiii</div>
+      </div>
+      <div class="s4-mini-ctrl">
+        <button class="s4-mini-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="s4-mini-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+        <button class="s4-mini-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="s4-mini-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/><polygon points="17 17 21 19 17 21" fill="white" stroke="none"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 바텀 내비 -->
+    <div class="s4-bottom-nav">
+      <button class="s4-nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        홈
+      </button>
+      <button class="s4-nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 8v-4"/><path d="M12 20v-4"/><path d="M8.5 8.5L5.5 5.5"/><path d="M18.5 18.5L15.5 15.5"/></svg>
+        ForYou
+      </button>
+      <button class="s4-nav-item active">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        탐색
+      </button>
+      <button class="s4-nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        음악서랍
+      </button>
+      <button class="s4-nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        바로가기
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ 더보기 모달 ══ -->
+  <div id="song-modal">
+    <!-- 상태바 -->
+    <div class="modal-status">
+      <span class="modal-status-time">6:48</span>
+      <div class="status-right">
+        <div class="sig-bars"><span style="height:4px"></span><span style="height:7px"></span><span style="height:10px"></span><span style="height:13px"></span></div>
+        <span class="s5g">5G</span>
+        <div class="batt"><div class="batt-body"><div class="batt-fill"></div></div><span class="batt-pct">71</span></div>
+      </div>
+    </div>
+
+    <!-- AAC 배지 -->
+    <div class="modal-aac-badge">
+      <div class="aac-pill">
+        <div class="aac-wave">
+          <span style="height:5px"></span><span style="height:9px"></span><span style="height:6px"></span>
+        </div>
+        AAC 96K
+      </div>
+    </div>
+
+    <!-- 앨범 아트 -->
+    <div class="modal-art">
+      <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="앨범 커버"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#8B2252,#C05080,#E8A0B0,#4A1A3A)'">
+    </div>
+
+    <!-- 곡 정보 -->
+    <div class="modal-song-info">
+      <div class="modal-song-title">404 (New Era)</div>
+      <div class="modal-song-artist">KiiiKiii (키키)</div>
+    </div>
+
+    <!-- 아이콘 버튼 행 -->
+    <div class="modal-icons">
+      <button class="modal-icon-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>담기</span>
+      </button>
+      <button class="modal-icon-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>저장</span>
+      </button>
+      <button class="modal-icon-btn btn-heart" id="btnHeart3" onclick="toggleHeart()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path class="heart-path" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="modal-heart-count">67,404</span>
+      </button>
+      <button class="modal-icon-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <span>공유</span>
+      </button>
+      <button class="modal-icon-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <span>Instagram</span>
+      </button>
+    </div>
+
+    <!-- 믹스업 버튼 -->
+    <button class="modal-mixup-btn" onclick="closeModal(); goToMixup();">
+      <div class="mixup-icon">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      이 곡으로 믹스업
+    </button>
+
+    <div class="modal-divider"></div>
+
+    <!-- 메뉴 목록 -->
+    <div class="modal-menu">
+      <button class="modal-menu-item">곡정보</button>
+      <button class="modal-menu-item">앨범정보</button>
+      <button class="modal-menu-item">아티스트 채널</button>
+      <button class="modal-menu-item">뮤직비디오</button>
+      <button class="modal-menu-item">유사한 곡 보기</button>
+      <button class="modal-menu-item disabled">카카오톡 프로필 뮤직 설정</button>
+    </div>
+
+    <!-- 닫기 -->
+    <div class="modal-close-bar">
+      <button class="modal-close-btn" onclick="closeModal()">닫기</button>
+    </div>
+  </div>
+
+  <!-- ══ 설문 모달 ══ -->
+  <div id="survey-modal">
+    <div id="survey-form-view" style="display:flex;flex-direction:column;flex:1;">
+      <div class="survey-header">
+        <div class="task-badge" style="margin-bottom:12px;">과업 1</div>
+        <div id="survey1-result-msg" class="survey-result-msg"></div>
+        <div id="survey1-result-sub" class="survey-result-sub"></div>
+        <div class="survey-sub">솔직하게 답해주세요</div>
+      </div>
+      <div class="survey-body">
+        <div class="survey-q">
+          <div class="survey-q-badge">Q1</div>
+          <div class="survey-q-label">추천곡 추가 과정이 직관적이고 쉬웠나요?</div>
+          <div class="survey-scale">
+            <button class="survey-scale-btn" onclick="selectScore('q1',1,this)">1</button>
+            <button class="survey-scale-btn" onclick="selectScore('q1',2,this)">2</button>
+            <button class="survey-scale-btn" onclick="selectScore('q1',3,this)">3</button>
+            <button class="survey-scale-btn" onclick="selectScore('q1',4,this)">4</button>
+            <button class="survey-scale-btn" onclick="selectScore('q1',5,this)">5</button>
+          </div>
+          <div class="survey-scale-label"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+        </div>
+        <div class="survey-q">
+          <div class="survey-q-badge">Q2</div>
+          <div class="survey-q-label">기존보다 플레이리스트 UX가 간편해졌나요?</div>
+          <div class="survey-scale">
+            <button class="survey-scale-btn" onclick="selectScore('q2',1,this)">1</button>
+            <button class="survey-scale-btn" onclick="selectScore('q2',2,this)">2</button>
+            <button class="survey-scale-btn" onclick="selectScore('q2',3,this)">3</button>
+            <button class="survey-scale-btn" onclick="selectScore('q2',4,this)">4</button>
+            <button class="survey-scale-btn" onclick="selectScore('q2',5,this)">5</button>
+          </div>
+          <div class="survey-scale-label"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+        </div>
+      </div>
+      <button class="survey-submit" id="survey-submit-btn" onclick="submitSurvey1()" disabled>다음 과업으로 →</button>
+    </div>
+    <div id="survey-done-view" class="survey-done" style="display:none;">
+      <div class="survey-done-icon">✅</div>
+      <div class="survey-done-title">과업 1 완료!</div>
+      <div class="survey-done-sub">잠시 후 과업 2가 시작됩니다.</div>
+    </div>
+  </div>
+
+<!-- ══ 과업1 지시 오버레이 ══ -->
+  <div id="task-overlay">
+    <div class="task-badge">과업 1 / 2</div>
+    <div class="task-title">음악을 듣다가 믹스업 기능을 찾아서,<br>추천곡 1개를 재생목록에 담아보세요</div>
+    <div class="task-time-hint">⏱ 제한 시간 30초</div>
+    <button class="task-start-btn" onclick="startTask1()">시작하기</button>
+  </div>
+
+  <div id="success-toast"></div>
+
+  <!-- ══ 과업2 지시 오버레이 ══ -->
+  <div id="task2-overlay">
+    <div class="task-badge">과업 2 / 2</div>
+    <div class="task-title">좋아요 한 음악들이 어디에<br>모여있는지 찾아보세요</div>
+    <div class="task-time-hint">⏱ 제한 시간 30초</div>
+    <button class="task-start-btn" onclick="startTask2()">시작하기</button>
+  </div>
+
+  <!-- ══ 과업2 설문 ══ -->
+  <div id="survey2-modal">
+    <div id="survey2-form-view" style="display:flex;flex-direction:column;flex:1;">
+      <div class="survey-header">
+        <div class="task-badge" style="margin-bottom:12px;">과업 2 완료</div>
+        <div id="survey2-result-msg" class="survey-result-msg"></div>
+        <div id="survey2-result-sub" class="survey-result-sub"></div>
+        <div class="survey-sub">솔직하게 답해주세요</div>
+      </div>
+      <div class="survey-body">
+        <div class="survey-q">
+          <div class="survey-q-badge">Q1</div>
+          <div class="survey-q-label">음악서랍에서 좋아요 앨범을 쉽게 찾을 수 있었나요?</div>
+          <div class="survey-scale">
+            <button class="survey-scale-btn" onclick="selectScore2('q1',1,this)">1</button>
+            <button class="survey-scale-btn" onclick="selectScore2('q1',2,this)">2</button>
+            <button class="survey-scale-btn" onclick="selectScore2('q1',3,this)">3</button>
+            <button class="survey-scale-btn" onclick="selectScore2('q1',4,this)">4</button>
+            <button class="survey-scale-btn" onclick="selectScore2('q1',5,this)">5</button>
+          </div>
+          <div class="survey-scale-label"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+        </div>
+        <div class="survey-q">
+          <div class="survey-q-badge">Q2</div>
+          <div class="survey-q-label">좋아요 곡이 자동으로 모여있는 게 유용하다고 느꼈나요?</div>
+          <div class="survey-scale">
+            <button class="survey-scale-btn" onclick="selectScore2('q2',1,this)">1</button>
+            <button class="survey-scale-btn" onclick="selectScore2('q2',2,this)">2</button>
+            <button class="survey-scale-btn" onclick="selectScore2('q2',3,this)">3</button>
+            <button class="survey-scale-btn" onclick="selectScore2('q2',4,this)">4</button>
+            <button class="survey-scale-btn" onclick="selectScore2('q2',5,this)">5</button>
+          </div>
+          <div class="survey-scale-label"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+        </div>
+      </div>
+      <button class="survey-submit" id="survey2-submit-btn" onclick="submitSurvey2()" disabled>제출하기</button>
+    </div>
+    <div id="survey2-done-view" class="survey-done" style="display:none;">
+      <div class="survey-done-icon">✅</div>
+      <div class="survey-done-title">모든 과업 완료!</div>
+      <div class="survey-done-sub">참여해주셔서 감사합니다 😊</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ── Supabase 연결 (안전하게 초기화) ──
+  const SUPA_URL = 'http://localhost:54321';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRFA0NiK7kyqd6oUkU3oCNZm0-sBRW1QSHmEy8KZJw';
+  let db = null;
+  try {
+    if (window.supabase) db = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+  } catch(e) { console.warn('Supabase 초기화 실패 (데이터 저장 없이 진행):', e); }
+
+  const sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2,6);
+  let task1StartTime = null;
+  let task1Completed = false;
+  let countdownTimer = null;
+  let timeLeft = 30;
+
+  async function trackEvent(eventType, screen) {
+    if (!db) return;
+    try {
+      await db.from('ux_events').insert({ session_id: sessionId, event_type: eventType, screen: screen });
+    } catch(e) { console.warn('track error:', e); }
+  }
+
+  // ── 과업1 카운트다운 ──
+  let task1Success = false;
+  let survey1Shown = false;
+
+  function updateCountdownDisplay() {
+    document.querySelectorAll('.status-time').forEach(el => {
+      el.textContent = timeLeft + '초';
+      el.classList.toggle('countdown-warn', timeLeft <= 5);
+    });
+  }
+
+  function startTask1() {
+    const ov = document.getElementById('task-overlay');
+    ov.style.transition = 'opacity 0.25s';
+    ov.style.opacity = '0';
+    setTimeout(() => { ov.style.display = 'none'; }, 260);
+    task1StartTime = Date.now();
+    task1Success = false;
+    timeLeft = 30;
+    trackEvent('task1_start', 'home');
+    updateCountdownDisplay();
+    countdownTimer = setInterval(() => {
+      timeLeft--;
+      updateCountdownDisplay();
+      if (timeLeft <= 0) {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+        if (!task1Success) {
+          trackEvent('task1_timeout', 'mixup');
+          openSurvey1();
+        }
+      }
+    }, 1000);
+  }
+
+  function openSurvey1() {
+    const msg = document.getElementById('survey1-result-msg');
+    const sub = document.getElementById('survey1-result-sub');
+    if (task1Success) {
+      msg.textContent = '완료했어요! 🎉';
+      sub.textContent = '30초 안에 추천곡을 담으셨어요';
+    } else {
+      msg.textContent = '시간이 초과됐어요';
+      sub.textContent = '괜찮아요! 잠깐 질문 2개만요';
+    }
+    document.getElementById('survey-modal').classList.add('open');
+  }
+
+  // ── 설문 관련 ──
+  const surveyScores = { q1: null, q2: null };
+  function selectScore(key, val, btn) {
+    surveyScores[key] = val;
+    btn.closest('.survey-scale').querySelectorAll('.survey-scale-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const allAnswered = Object.values(surveyScores).every(v => v !== null);
+    document.getElementById('survey-submit-btn').disabled = !allAnswered;
+  }
+
+  async function submitSurvey1() {
+    document.getElementById('survey-submit-btn').disabled = true;
+    if (db) try {
+      await db.from('ux_surveys').insert({
+        session_id: sessionId,
+        k5: surveyScores.q1,
+        k6: surveyScores.q2
+      });
+    } catch(e) { console.warn('survey error:', e); }
+    document.getElementById('survey-form-view').style.display = 'none';
+    document.getElementById('survey-done-view').style.display = 'flex';
+    // 3초 후 과업2 시작 (추후 구현)
+    setTimeout(() => {
+      document.getElementById('survey-modal').classList.remove('open');
+      document.getElementById('task2-overlay').classList.add('show');
+    }, 2500);
+  }
+
+  // ── 과업2 ──
+  let task2Completed = false;
+  let countdown2Timer = null;
+  let timeLeft2 = 30;
+
+  function startTask2() {
+    document.getElementById('task2-overlay').classList.remove('show');
+    document.getElementById('task2-overlay').style.display = 'none';
+
+    // ── 화면 리셋: 홈(screen0)으로 돌아가기 ──
+    document.getElementById('screen0').classList.remove('slide-out');
+    document.getElementById('screen3').classList.remove('slide-in');
+    document.getElementById('mixup-overlay').classList.remove('open');
+    document.getElementById('btnMixup').classList.remove('active');
+
+    task2Completed = false;
+    timeLeft2 = 30;
+    trackEvent('task2_start', 'home');
+    updateCountdownDisplay2();
+    countdown2Timer = setInterval(() => {
+      timeLeft2--;
+      updateCountdownDisplay2();
+      if (timeLeft2 <= 0) {
+        clearInterval(countdown2Timer);
+        countdown2Timer = null;
+        if (!task2Completed) {
+          trackEvent('task2_timeout', 'unknown');
+          openSurvey2(false);
+        }
+      }
+    }, 1000);
+  }
+
+  function updateCountdownDisplay2() {
+    document.querySelectorAll('.status-time').forEach(el => {
+      el.textContent = timeLeft2 + '초';
+      el.classList.toggle('countdown-warn', timeLeft2 <= 5);
+    });
+  }
+
+  function completeTask2() {
+    if (!task2Completed && countdown2Timer) {
+      task2Completed = true;
+      clearInterval(countdown2Timer);
+      countdown2Timer = null;
+      trackEvent('task2_complete', 'drawer_like');
+      document.querySelectorAll('.status-time').forEach(el => { el.textContent = '완료!'; el.classList.remove('countdown-warn'); });
+      const toast = document.getElementById('success-toast');
+      toast.textContent = '찾았어요! 🎉';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+      setTimeout(() => openSurvey2(true), 5000);
+    }
+  }
+
+  function openSurvey2(success) {
+    const msg = document.getElementById('survey2-result-msg');
+    const sub = document.getElementById('survey2-result-sub');
+    if (success) {
+      msg.textContent = '찾으셨네요! 🎉';
+      sub.textContent = '30초 안에 발견하셨어요';
+    } else {
+      msg.textContent = '시간이 초과됐어요';
+      sub.textContent = '괜찮아요! 잠깐 질문 2개만요';
+    }
+    document.getElementById('survey2-modal').classList.add('open');
+  }
+
+  const survey2Scores = { q1: null, q2: null };
+  function selectScore2(key, val, btn) {
+    survey2Scores[key] = val;
+    btn.closest('.survey-scale').querySelectorAll('.survey-scale-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const allAnswered = Object.values(survey2Scores).every(v => v !== null);
+    document.getElementById('survey2-submit-btn').disabled = !allAnswered;
+  }
+
+  async function submitSurvey2() {
+    document.getElementById('survey2-submit-btn').disabled = true;
+    if (db) try {
+      await db.from('ux_surveys').insert({
+        session_id: sessionId,
+        k7: survey2Scores.q1,
+        k8: survey2Scores.q2
+      });
+    } catch(e) { console.warn('survey2 error:', e); }
+    document.getElementById('survey2-form-view').style.display = 'none';
+    document.getElementById('survey2-done-view').style.display = 'flex';
+  }
+
+
+  // ── 전체 노래 풀 ──
+  const songPool = [
+    { id: 'magnetic',   name: 'Magnetic',       artist: 'ILLIT',           img: '',  fallback: 'linear-gradient(135deg,#d4a0c0,#8b4060)' },
+    { id: 'blueflame',  name: 'Blue Flame',      artist: 'LE SSERAFIM',     img: '',  fallback: 'linear-gradient(135deg,#1a2a6c,#b21f1f)' },
+    { id: 'focus',      name: 'Focus',           artist: 'Hearts2Hearts',   img: '',  fallback: 'linear-gradient(135deg,#c060a0,#603080)' },
+    { id: 'eta',        name: 'ETA',             artist: 'NewJeans',        img: '',  fallback: 'linear-gradient(135deg,#2c5f8a,#0a1f3c)' },
+    { id: 'hypebook',   name: 'Hype Boy',        artist: 'NewJeans',        img: '',  fallback: 'linear-gradient(135deg,#e8c080,#a04010)' },
+    { id: 'spicy',      name: 'Spicy',           artist: 'aespa',           img: '',  fallback: 'linear-gradient(135deg,#8020c0,#300850)' },
+    { id: 'queencard',  name: 'Queencard',       artist: '(G)I-DLE',        img: '',  fallback: 'linear-gradient(135deg,#e0c040,#804010)' },
+    { id: 'lovedive',   name: 'LOVE DIVE',       artist: 'IVE',             img: '',  fallback: 'linear-gradient(135deg,#40a0e0,#102060)' },
+    { id: 'nxde',       name: 'Nxde',            artist: '(G)I-DLE',        img: '',  fallback: 'linear-gradient(135deg,#c0a060,#503010)' },
+    { id: 'supernova',  name: 'Supernova',       artist: 'aespa',           img: '',  fallback: 'linear-gradient(135deg,#6040e0,#100050)' },
+    { id: 'unforgiven', name: 'UNFORGIVEN',      artist: 'LE SSERAFIM',     img: '',  fallback: 'linear-gradient(135deg,#c08040,#402010)' },
+    { id: 'ditto',      name: 'Ditto',           artist: 'NewJeans',        img: '',  fallback: 'linear-gradient(135deg,#80c0e0,#204060)' },
+    { id: 'after',      name: 'After LIKE',      artist: 'IVE',             img: '',  fallback: 'linear-gradient(135deg,#e060a0,#600040)' },
+    { id: 'nextlevel',  name: 'Next Level',      artist: 'aespa',           img: '',  fallback: 'linear-gradient(135deg,#40e0c0,#006050)' },
+  ];
+
+  // 현재 표시 중인 픽: { idx: number, sim: number }[]
+  let currentPicks = [];
+  let added = []; // 재생목록에 추가된 song id 배열
+
+  // ── iTunes API로 앨범 커버 자동 로드 ──
+  async function fetchArtwork(song) {
+    try {
+      const q = encodeURIComponent(`${song.name} ${song.artist}`);
+      const res = await fetch(`https://itunes.apple.com/search?term=${q}&entity=song&limit=1&country=kr`);
+      const data = await res.json();
+      if (data.results && data.results.length > 0) {
+        // 100x100 → 600x600으로 고화질 변환
+        song.img = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
+      }
+    } catch(e) { /* 실패시 fallback 그라디언트 사용 */ }
+  }
+
+  // ── 아티스트 사진 fetch (TheAudioDB 공식 아티스트 썸네일) ──
+  async function fetchArtistPhoto(artistName) {
+    try {
+      const res = await fetch(`https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodeURIComponent(artistName)}`);
+      const data = await res.json();
+      if (data.artists && data.artists.length > 0) {
+        const a = data.artists[0];
+        return a.strArtistThumb || a.strArtistFanart || null;
+      }
+    } catch(e) {}
+    return null;
+  }
+
+  // ── 음악서랍 이미지 세팅 ──
+  function setDrawerImg(imgId, artId, src, fallback) {
+    const imgEl = document.getElementById(imgId);
+    if (!imgEl || !src) return;
+    const artEl = artId ? document.getElementById(artId) : imgEl.parentElement;
+    imgEl.onload = () => { imgEl.style.display = 'block'; };
+    imgEl.onerror = () => { imgEl.style.display = 'none'; if (artEl) artEl.style.background = fallback; };
+    imgEl.src = src;
+  }
+
+  // ── 초기화 ──
+  async function init() {
+    // 모든 곡 커버를 병렬 로드
+    await Promise.all(songPool.map(s => fetchArtwork(s)));
+    currentPicks = pickRandom([], 3);
+    renderMixupList();
+
+    // 고정 플레이리스트 커버: KiiiKiii 404 앨범 이미지 직접 fetch
+    (async () => {
+      try {
+        const q = encodeURIComponent('404 New Era KiiiKiii');
+        const res = await fetch(`https://itunes.apple.com/search?term=${q}&entity=song&limit=1&country=kr`);
+        const data = await res.json();
+        if (data.results && data.results.length > 0) {
+          const src = data.results[0].artworkUrl100.replace('100x100bb','600x600bb');
+          setDrawerImg('pinnedImg','pinnedArt', src, 'linear-gradient(135deg,#8B2252,#C05080)');
+        }
+      } catch(e) {}
+    })();
+
+    // 음악서랍 좋아요 패널 이미지 (앨범/아티스트/곡 서브패널)
+    const likeMap = [
+      // 앨범 서브패널
+      { imgId:'likeImg1',       artId:'likeArt1',       songId:'eta'       },  // Delulu Pack 대표
+      { imgId:'likeImg2',       artId:'likeArt2',       songId:'magnetic'  },  // ILLIT 앨범
+      { imgId:'likeImg3',       artId:'likeArt3',       songId:'lovedive'  },  // IVE 앨범
+      // 곡 서브패널
+      { imgId:'likeImg4',       artId:'likeArt4',       songId:'eta'       },
+      { imgId:'likeImg5',       artId:'likeArt5',       songId:'magnetic'  },
+      { imgId:'likeImg6',       artId:'likeArt6',       songId:'lovedive'  },
+      { imgId:'likeImg7',       artId:'likeArt7',       songId:'queencard' },
+      { imgId:'likeImg8',       artId:'likeArt8',       songId:'ditto'     },
+    ];
+    const recentMap = [
+      { imgId:'recentImg1', artId:'recentArt1', songId:'supernova' },
+      { imgId:'recentImg2', artId:'recentArt2', songId:'hypebook' },
+      { imgId:'recentImg3', artId:'recentArt3', songId:'spicy' },
+      { imgId:'recentImg4', artId:'recentArt4', songId:'blueflame' },
+      { imgId:'recentImg5', artId:'recentArt5', songId:'after' },
+    ];
+    [...likeMap, ...recentMap].forEach(({ imgId, artId, songId }) => {
+      const song = songPool.find(s => s.id === songId);
+      if (song && song.img) setDrawerImg(imgId, artId, song.img, song.fallback);
+    });
+
+    // 아티스트 사진 (Deezer 공식 홍보 사진)
+    const artistList = [
+      { imgId:'likeArtistImg1', name:'KiiiKiii', fallback:'linear-gradient(135deg,#a020a0,#ff69b4)' },
+      { imgId:'likeArtistImg2', name:'ILLIT',    fallback:'linear-gradient(135deg,#e87cbe,#ffc0cb)' },
+      { imgId:'likeArtistImg3', name:'aespa',    fallback:'linear-gradient(135deg,#1a1a2e,#16213e)' },
+      { imgId:'likeArtistImg4', name:'IVE',      fallback:'linear-gradient(135deg,#1c1c6e,#4040aa)' },
+    ];
+    artistList.forEach(async ({ imgId, name, fallback }) => {
+      const src = await fetchArtistPhoto(name);
+      if (src) setDrawerImg(imgId, null, src, fallback);
+    });
+  }
+
+  // ── 화면3 탭 전환 ──
+  function showS3Tab(tab) {
+    const isPlaylist = tab === 'playlist';
+    document.getElementById('s3-playlist-tab').style.display = isPlaylist ? 'flex' : 'none';
+    document.getElementById('s3-drawer-tab').style.display   = isPlaylist ? 'none' : 'flex';
+    document.getElementById('tabPlaylist').classList.toggle('active', isPlaylist);
+    document.getElementById('tabDrawer').classList.toggle('active', !isPlaylist);
+  }
+
+  // ── 음악서랍 필터 탭 전환 ──
+  function showDrawerFilter(filter) {
+    ['playlist','like','recent'].forEach(f => {
+      document.getElementById('dfilter-' + f).classList.toggle('active', f === filter);
+      document.getElementById('dpanel-'  + f).classList.toggle('active', f === filter);
+    });
+  }
+
+  // ── 좋아요 세로 메뉴 전환 ──
+  function showLikeSub(sub) {
+    const menu = document.getElementById('like-menu');
+    ['album','artist','song'].forEach(s => {
+      document.getElementById('lsubpanel-' + s).classList.remove('active');
+    });
+    if (sub === null) {
+      // 메뉴로 돌아가기
+      menu.style.display = 'flex';
+    } else {
+      menu.style.display = 'none';
+      document.getElementById('lsubpanel-' + sub).classList.add('active');
+    }
+  }
+
+  // exclude에 없는 인덱스에서 count개 랜덤 선택, { idx, sim } 반환
+  function pickRandom(excludeIndices, count) {
+    const available = songPool.map((_, i) => i).filter(i => !excludeIndices.includes(i));
+    const result = [];
+    while (result.length < count && available.length > 0) {
+      const r = Math.floor(Math.random() * available.length);
+      const idx = available.splice(r, 1)[0];
+      const sim = Math.floor(Math.random() * 15) + 78; // 78~92%
+      result.push({ idx, sim });
+    }
+    return result;
+  }
+
+  // ── Mixup 목록 렌더 ──
+  function renderMixupList() {
+    const container = document.getElementById('mixup-track-list');
+    const playIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+    const plusIcon = `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`;
+    const checkIcon = `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+    const dotsIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>`;
+
+    container.innerHTML = currentPicks.map(({ idx, sim }) => {
+      const s = songPool[idx];
+      const isAdded = added.includes(s.id);
+      const imgTag = s.img
+        ? `<img src="${s.img}" alt="${s.name}" onerror="this.style.display='none';this.parentElement.style.background='${s.fallback}'">`
+        : '';
+      const artStyle = s.img ? '' : `style="background:${s.fallback}"`;
+      return `
+        <div class="track-item">
+          <div class="track-art" ${artStyle}>${imgTag}</div>
+          <div class="track-info">
+            <div class="track-name">${s.name}</div>
+            <div class="track-artist">${s.artist}</div>
+            <div class="track-sim">유사도 ${sim}%</div>
+          </div>
+          <div class="track-actions">
+            <button class="track-btn">${playIcon}</button>
+            <button class="track-btn ${isAdded ? 'added' : ''}" id="add-${s.id}" onclick="addTrack('${s.id}')">
+              ${isAdded ? checkIcon : plusIcon}
+            </button>
+            <button class="track-btn">${dotsIcon}</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── 새로고침 ──
+  function refreshMixup() {
+    const icon = document.getElementById('refreshIcon');
+    // 스핀 애니메이션
+    icon.style.transition = 'transform 0.45s ease';
+    icon.style.transform = 'rotate(360deg)';
+    setTimeout(() => {
+      icon.style.transition = 'none';
+      icon.style.transform = 'rotate(0deg)';
+    }, 460);
+
+    // 현재 표시 중인 인덱스를 제외하고 새로 뽑기
+    const currentIndices = currentPicks.map(p => p.idx);
+    currentPicks = pickRandom(currentIndices, 3);
+    renderMixupList();
+  }
+
+  // ── 더보기 모달 ──
+  function openModal() {
+    document.getElementById('song-modal').classList.add('open');
+  }
+  function closeModal() {
+    document.getElementById('song-modal').classList.remove('open');
+  }
+
+  // ── 하트 토글 ──
+  function toggleHeart() {
+    const active = document.getElementById('btnHeart').classList.toggle('active');
+    document.getElementById('btnHeart2').classList.toggle('active', active);
+    document.getElementById('btnHeart3').classList.toggle('active', active);
+  }
+
+  // ── 화면 전환 ──
+  function goToMixup() {
+    mixupClickTime = Date.now();
+    trackEvent('mixup_clicked', 'player');
+    document.getElementById('btnMixup').classList.add('active');
+    document.getElementById('mixup-overlay').classList.add('open');
+  }
+
+  function closeMixupSheet() {
+    document.getElementById('mixup-overlay').classList.remove('open');
+    document.getElementById('btnMixup').classList.remove('active');
+  }
+
+  function goToPlaylist() {
+    trackEvent('task_complete', 'playlist');
+    document.getElementById('screen3').classList.add('slide-in');
+    if (task1Success && !survey1Shown) {
+      survey1Shown = true;
+      setTimeout(() => openSurvey1(), 5000);
+    }
+  }
+
+  function backToMixup() {
+    document.getElementById('screen3').classList.remove('slide-in');
+  }
+
+  function goToAlbum() {
+    document.getElementById('screen4').classList.add('slide-up');
+  }
+
+  function backFromAlbum() {
+    document.getElementById('screen4').classList.remove('slide-up');
+  }
+
+  // ── 트랙 추가 / 제거 ──
+  function addTrack(id) {
+    if (added.includes(id)) {
+      goToPlaylist();
+      return;
+    }
+    added.push(id);
+    task1Success = true;
+    trackEvent('song_added', 'mixup');
+    // 과업1 완료 → 카운트다운 중단
+    if (countdownTimer) {
+      clearInterval(countdownTimer);
+      countdownTimer = null;
+      document.querySelectorAll('.status-time').forEach(el => { el.textContent = '완료!'; el.classList.remove('countdown-warn'); });
+      const t1 = document.getElementById('success-toast');
+      t1.textContent = '완료했어요! 🎉';
+      t1.classList.add('show');
+      setTimeout(() => t1.classList.remove('show'), 2000);
+    }
+
+    const btn = document.getElementById('add-' + id);
+    if (btn) {
+      btn.classList.add('added');
+      btn.innerHTML = `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+    }
+    renderS3();
+    goToPlaylist();
+  }
+
+  function removeTrack(id) {
+    added = added.filter(k => k !== id);
+
+    const btn = document.getElementById('add-' + id);
+    if (btn) {
+      btn.classList.remove('added');
+      btn.innerHTML = `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`;
+    }
+    renderS3();
+  }
+
+  // ── 재생목록(화면3) 렌더 ──
+  function renderS3() {
+    const empty  = document.getElementById('s3-empty');
+    const list   = document.getElementById('s3-list');
+    const footer = document.getElementById('s3-footer');
+    const fCount = document.getElementById('s3-footer-count');
+
+    if (added.length === 0) {
+      empty.style.display  = 'flex';
+      list.style.display   = 'none';
+      footer.style.display = 'none';
+    } else {
+      empty.style.display  = 'none';
+      list.style.display   = 'block';
+      footer.style.display = 'flex';
+      fCount.textContent   = added.length + '곡';
+
+      list.innerHTML = added.map((id, i) => {
+        const s = songPool.find(s => s.id === id);
+        const imgTag = s.img
+          ? `<img src="${s.img}" alt="${s.name}" onerror="this.style.display='none';this.parentElement.style.background='${s.fallback}'">`
+          : '';
+        const artStyle = s.img ? '' : `style="background:${s.fallback}"`;
+        return `
+          <div class="s3-track">
+            <span class="s3-track-num"><span class="s3-track-circle"></span></span>
+            <div class="s3-track-art" ${artStyle}>${imgTag}</div>
+            <div class="s3-track-info">
+              <div class="s3-track-name">${s.name}</div>
+              <div class="s3-track-artist">${s.artist}</div>
+            </div>
+            <button class="s3-track-remove" onclick="removeTrack('${id}')" title="제거">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>`;
+      }).join('');
+    }
+  }
+
+
+  function goToPlayer() { document.getElementById('screen0').classList.add('slide-out'); }
+  function backToHome() { document.getElementById('screen0').classList.remove('slide-out'); }
+  async function loadHomeImages() {
+    const items = [
+      {q:'BUMPA BIBI',i:'h-art0',w:'h-art0-wrap',fb:'linear-gradient(135deg,#c84060,#601030)'},
+      {q:'괜찮아 사랑이니까 PLAVE',i:'h-art1',w:'h-art1-wrap',fb:'linear-gradient(135deg,#6080c0,#202060)'},
+      {q:'HYPER LINK DXMON',i:'h-art2',w:'h-art2-wrap',fb:'linear-gradient(135deg,#0080c0,#001040)'},
+      {q:'오로라 박현규',i:'h-art3',w:'h-art3-wrap',fb:'linear-gradient(135deg,#e0a040,#804010)'},
+      {q:'Drowning WOODZ',i:'s0-sart0',w:'s0-sart0-wrap',fb:'linear-gradient(135deg,#2060a0,#081030)'},
+      {q:'404 New Era KiiiKiii',i:'s0-sart1',w:'s0-sart1-wrap',fb:'linear-gradient(135deg,#8B2252,#C05080)'},
+      {q:'404 New Era KiiiKiii',i:'s0-sart1b',w:'s0-sart1b-wrap',fb:'linear-gradient(135deg,#8B2252,#C05080)'},
+      {q:'Heavy Serenade NMIXX',i:'s0-sart2',w:'s0-sart2-wrap',fb:'linear-gradient(135deg,#e04060,#600020)'},
+    ];
+    await Promise.all(items.map(async({q,i,w,fb})=>{
+      try{
+        const r=await fetch('https://itunes.apple.com/search?term='+encodeURIComponent(q)+'&entity=song&limit=1&country=kr');
+        const d=await r.json();
+        if(d.results&&d.results.length>0){
+          const src=d.results[0].artworkUrl100.replace('100x100bb','600x600bb');
+          const imgEl=document.getElementById(i);
+          const wrapEl=document.getElementById(w);
+          if(imgEl){imgEl.onload=()=>{imgEl.style.display='block';};imgEl.onerror=()=>{imgEl.style.display='none';if(wrapEl)wrapEl.style.background=fb;};imgEl.src=src;}
+        }
+      }catch(e){}
+    }));
+  }
+
+  // 초기 실행
+  init();
+  loadHomeImages();
+</script>
+</body>
+</html>
