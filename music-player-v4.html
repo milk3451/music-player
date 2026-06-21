@@ -2201,8 +2201,8 @@
   // 메인 앨범 커버 로드
   async function loadMainAlbumArt() {
     try {
-      const q = encodeURIComponent('404 New Era');
-      const res = await fetch(`https://itunes.apple.com/search?term=${q}&entity=song&limit=1&country=us`);
+      const q = encodeURIComponent('Delulu KiiiKiii');
+      const res = await fetch(`https://itunes.apple.com/search?term=${q}&entity=song&limit=1&country=kr`);
       const data = await res.json();
       if (data.results && data.results.length > 0) {
         const src = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
