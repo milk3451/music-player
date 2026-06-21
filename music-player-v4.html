@@ -1641,8 +1641,8 @@
 
 <script>
   // ── Supabase 연결 (안전하게 초기화) ──
-  const SUPA_URL = 'http://brvywbbptxdhbeqnpnry.supabase.co';
-  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.00qeqqFJJPXbWYECcw4MvIBcd5B6EnlwKVECjLcPkW4';
+  const SUPA_URL = 'http://localhost:54321';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRFA0NiK7kyqd6oUkU3oCNZm0-sBRW1QSHmEy8KZJw';
   let db = null;
   try {
     if (window.supabase) db = window.supabase.createClient(SUPA_URL, SUPA_KEY);
