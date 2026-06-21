@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -32,7 +32,7 @@
     background: linear-gradient(to bottom, rgba(60,45,45,0.2) 0%, rgba(0,0,0,0.82) 58%, #000 100%);
   }
 
-  /* 상태바 */
+  /* ?�태�?*/
   .status-bar {
     display: flex; justify-content: space-between; align-items: center;
     padding: 14px 22px 4px; color: white; flex-shrink: 0;
@@ -75,7 +75,7 @@
   .btn-mixup.active { background: #18f915; border-color: #18f915; }
   .mixup-tri { fill: #000; }
 
-  /* 화면 전환 */
+  /* ?�면 ?�환 */
   #screen1 {
     position: absolute; inset: 0; z-index: 10;
     transition: transform 0.42s cubic-bezier(.32,.72,0,1), opacity 0.32s;
@@ -97,7 +97,7 @@
   }
   #screen3.slide-in { transform: translateX(0); opacity: 1; z-index: 30; }
 
-  /* ════ 화면 1 ════ */
+  /* ?�═?�═ ?�면 1 ?�═?�═ */
   .s1-content {
     position: relative; z-index: 5;
     height: 100%; display: flex; flex-direction: column; color: white;
@@ -133,7 +133,7 @@
   .bottom-nav { display: flex; align-items: center; justify-content: space-between; padding: 6px 34px 24px; margin-top: auto; flex-shrink: 0; }
   .nav-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; }
 
-  /* ════ 화면 2 ════ */
+  /* ?�═?�═ ?�면 2 ?�═?�═ */
   .s2-content {
     position: relative; z-index: 5;
     height: 100%; display: flex; flex-direction: column; color: white; overflow: hidden;
@@ -166,7 +166,7 @@
   }
   .s2-prog-times { display: flex; justify-content: space-between; margin-top: 4px; font-size: 11px; color: rgba(255,255,255,0.6); }
 
-  /* ════ 믹스업 오버레이 (화면1 위에 올라오는 바텀시트) ════ */
+  /* ?�═?�═ 믹스???�버?�이 (?�면1 ?�에 ?�라?�는 바�??�트) ?�═?�═ */
   #mixup-overlay {
     position: absolute; bottom: 0; left: 0; right: 0;
     height: 54%; z-index: 25;
@@ -180,7 +180,7 @@
     pointer-events: auto;
   }
 
-  /* 바텀 시트 */
+  /* 바�? ?�트 */
   .bottom-sheet {
     flex: 1; min-height: 0;
     background: rgba(55,55,55,0.97);
@@ -214,7 +214,7 @@
   .track-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
   .track-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.8); display: flex; padding: 3px; transition: color 0.2s; }
 
-  /* + 버튼 추가됨 상태 */
+  /* + 버튼 추�????�태 */
   .track-btn.added { color: #18f915; }
 
   .add-playlist-btn {
@@ -225,13 +225,13 @@
     cursor: pointer; font-family: inherit; flex-shrink: 0;
   }
 
-  /* ════ 화면 3 ════ */
+  /* ?�═?�═ ?�면 3 ?�═?�═ */
   .s3-content {
     position: relative; z-index: 5;
     height: 100%; display: flex; flex-direction: column; color: white;
   }
 
-  /* 이전 버튼 */
+  /* ?�전 버튼 */
   .s3-topbar {
     padding: 2px 16px 4px; flex-shrink: 0;
   }
@@ -242,7 +242,7 @@
     font-family: inherit; padding: 4px 0;
   }
 
-  /* 상단 탭 바 */
+  /* ?�단 ??�?*/
   .s3-tabs {
     display: flex; align-items: stretch;
     padding: 4px 16px 0; gap: 0; flex-shrink: 0;
@@ -268,7 +268,7 @@
     padding: 4px 6px;
   }
 
-  /* 빈 상태 */
+  /* �??�태 */
   .s3-empty {
     flex: 1; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 12px;
@@ -277,7 +277,7 @@
   .s3-empty-icon { opacity: 0.3; }
   .s3-empty p { font-size: 15px; text-align: center; line-height: 1.6; }
 
-  /* 추가된 곡 목록 */
+  /* 추�???�?목록 */
   .s3-list { flex: 1; overflow-y: auto; padding: 0 16px; }
   .s3-track {
     display: flex; align-items: center; gap: 12px;
@@ -303,7 +303,7 @@
   }
   .s3-track-remove:hover { color: rgba(255,255,255,0.7); }
 
-  /* 하단 재생 바 (화면3) */
+  /* ?�단 ?�생 �?(?�면3) */
   .s3-footer {
     flex-shrink: 0; padding: 12px 22px 28px;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -318,12 +318,12 @@
   }
   .s3-count-label { font-size: 13px; color: rgba(255,255,255,0.5); }
 
-  /* 재생목록 / 음악서랍 패널 래퍼 */
+  /* ?�생목록 / ?�악?�랍 ?�널 ?�퍼 */
   .s3-playlist-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-  /* 음악서랍 탭 콘텐츠 */
+  /* ?�악?�랍 ??콘텐�?*/
   .s3-drawer-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; display: none; }
-  /* 가로 필터 탭 */
+  /* 가�??�터 ??*/
   .s3-drawer-filter-bar { display: flex; gap: 8px; padding: 12px 16px 8px; flex-shrink: 0; overflow-x: auto; }
   .s3-drawer-filter-bar::-webkit-scrollbar { display: none; }
   .s3-drawer-filter-btn {
@@ -333,12 +333,12 @@
     font-family: inherit; padding: 6px 16px; cursor: pointer; transition: all 0.18s;
   }
   .s3-drawer-filter-btn.active { background: white; border-color: white; color: #000; }
-  /* 각 패널 */
+  /* �??�널 */
   .s3-drawer-panel { flex: 1; overflow-y: auto; display: none; }
   .s3-drawer-panel::-webkit-scrollbar { display: none; }
   .s3-drawer-panel.active { display: block; }
   #dpanel-like.active { display: flex !important; flex-direction: column; overflow: hidden; }
-  /* 드로어 아이템 */
+  /* ?�로???�이??*/
   .s3-drawer-item { display: flex; align-items: center; gap: 12px; padding: 9px 18px; cursor: pointer; }
   .s3-drawer-art {
     width: 56px; height: 56px; border-radius: 10px; overflow: hidden;
@@ -349,7 +349,7 @@
   .s3-drawer-name { font-size: 15px; font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .s3-drawer-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
   .s3-drawer-play { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.6); display: flex; padding: 6px; flex-shrink: 0; }
-  /* 좋아요 세로 메뉴 */
+  /* 좋아???�로 메뉴 */
   .s3-like-menu { display: flex; flex-direction: column; overflow-y: auto; flex: 1; }
   .s3-like-menu::-webkit-scrollbar { display: none; }
   .s3-like-menu-row {
@@ -360,11 +360,11 @@
   }
   .s3-like-menu-label { font-size: 16px; font-weight: 600; color: white; }
   .s3-like-menu-chevron { color: rgba(255,255,255,0.4); display: flex; }
-  /* 서브패널 */
+  /* ?�브?�널 */
   .s3-like-subpanel { display: none; overflow-y: auto; flex: 1; }
   .s3-like-subpanel::-webkit-scrollbar { display: none; }
   .s3-like-subpanel.active { display: block; }
-  /* 서브패널 헤더 (뒤로가기) */
+  /* ?�브?�널 ?�더 (?�로가�? */
   .s3-like-subheader {
     display: flex; align-items: center; gap: 8px;
     padding: 10px 16px 6px; flex-shrink: 0;
@@ -375,7 +375,7 @@
     gap: 4px; font-size: 14px; font-weight: 600; font-family: inherit; padding: 4px 0;
   }
 
-  /* ════ 화면 4: 앨범 상세 ════ */
+  /* ?�═?�═ ?�면 4: ?�범 ?�세 ?�═?�═ */
   #screen4 {
     position: absolute; inset: 0; z-index: 20;
     background: #0d0d0d;
@@ -399,11 +399,11 @@
   .s4-title { font-size: 17px; font-weight: 700; color: white; }
   .s4-dots { background: none; border: none; cursor: pointer; color: white; display: flex; padding: 4px; }
 
-  /* 스크롤 가능한 중간 영역 */
+  /* ?�크�?가?�한 중간 ?�역 */
   .s4-scroll { flex: 1; overflow-y: auto; }
   .s4-scroll::-webkit-scrollbar { display: none; }
 
-  /* 앨범 커버 */
+  /* ?�범 커버 */
   .s4-album-cover {
     width: 180px; height: 180px; border-radius: 14px; overflow: hidden;
     margin: 6px auto 12px; background: linear-gradient(135deg,#8B2252,#C05080);
@@ -459,7 +459,7 @@
 
   .s4-track-list { padding: 0 16px; }
 
-  /* 앨범 소개 */
+  /* ?�범 ?�개 */
   .s4-album-intro {
     padding: 22px 20px 16px;
     border-top: 1px solid rgba(255,255,255,0.08);
@@ -521,7 +521,7 @@
   }
   .s4-nav-item.active { color: #1db954; }
 
-  /* ════ 더보기 모달 ════ */
+  /* ?�═?�═ ?�보�?모달 ?�═?�═ */
   #song-modal {
     position: absolute; inset: 0; z-index: 50;
     background: linear-gradient(to bottom, rgba(55,40,35,0.97) 0%, rgba(10,8,8,0.99) 100%);
@@ -651,7 +651,7 @@
   .s0-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; cursor: pointer; font-family: inherit; padding: 4px 0; font-size: 10px; color: rgba(255,255,255,0.45); }
   .s0-nav-item.active { color: #18f915; }
 
-  /* ════ 설문 모달 ════ */
+  /* ?�═?�═ ?�문 모달 ?�═?�═ */
   #survey-modal {
     position: absolute; inset: 0; z-index: 9998;
     background: #0d0d0d;
@@ -690,7 +690,7 @@
   .survey-done-title { font-size: 22px; font-weight: 800; color: white; }
   .survey-done-sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
 
-  /* ════ 과업 지시 오버레이 ════ */
+  /* ?�═?�═ 과업 지???�버?�이 ?�═?�═ */
   #task-overlay {
     position: absolute; inset: 0; z-index: 9999;
     background: rgba(0,0,0,0.92);
@@ -705,10 +705,10 @@
   .task-time-hint { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
   .task-start-btn { background: #18f915; border: none; border-radius: 14px; color: #000; font-size: 16px; font-weight: 800; padding: 14px 48px; cursor: pointer; font-family: inherit; }
 
-  /* ════ 카운트다운 강조 ════ */
+  /* ?�═?�═ 카운?�다??강조 ?�═?�═ */
   .status-time.countdown-warn { color: #ff4444 !important; font-weight: 800; }
 
-  /* ════ 설문 모달 리셋 (2문항 버전) ════ */
+  /* ?�═?�═ ?�문 모달 리셋 (2문항 버전) ?�═?�═ */
   #survey-modal {
     position: absolute; inset: 0; z-index: 70;
     background: #0d0d0d;
@@ -736,11 +736,11 @@
   .survey-done-title { font-size: 22px; font-weight: 800; color: white; }
   .survey-done-sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
 
-  /* ════ 과업2 설문 결과 메시지 ════ */
+  /* ?�═?�═ 과업2 ?�문 결과 메시지 ?�═?�═ */
   .survey-result-msg { font-size: 22px; font-weight: 800; color: white; text-align: center; margin-bottom: 8px; }
   .survey-result-sub { font-size: 13px; color: rgba(255,255,255,0.5); text-align: center; margin-bottom: 28px; }
 
-  /* ════ 과업2 설문 모달 ════ */
+  /* ?�═?�═ 과업2 ?�문 모달 ?�═?�═ */
   #survey2-modal {
     position: absolute; inset: 0; z-index: 9997;
     background: #0d0d0d;
@@ -751,7 +751,7 @@
   }
   #survey2-modal.open { opacity: 1; pointer-events: all; }
 
-  /* ════ 과업2 지시 오버레이 ════ */
+  /* ?�═?�═ 과업2 지???�버?�이 ?�═?�═ */
   #task2-overlay {
     position: absolute; inset: 0; z-index: 9996;
     background: rgba(0,0,0,0.92);
@@ -762,7 +762,7 @@
   }
   #task2-overlay.show { display: flex; }
 
-  /* ════ 찾았어요 토스트 ════ */
+  /* ?�═?�═ 찾았?�요 ?�스???�═?�═ */
   #success-toast {
     position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
     z-index: 9995; background: #18f915; color: #000;
@@ -777,30 +777,30 @@
 </head>
 <body>
 <div class="phone">
-  <!-- screen0: 홈/차트 -->
+  <!-- screen0: ??차트 -->
   <div id="screen0">
     <div class="s0-content">
       <div class="status-bar"><span class="status-time">6:49</span><div class="status-right"><div class="sig-bars"><span style="height:4px"></span><span style="height:7px"></span><span style="height:10px"></span><span style="height:13px"></span></div><span class="s5g">5G</span><div class="batt"><div class="batt-body"><div class="batt-fill"></div></div><span class="batt-pct">70</span></div></div></div>
       <div class="s0-albums">
         <div class="s0-album-item"><div class="s0-album-thumb" id="h-art0-wrap" style="background:linear-gradient(135deg,#c84060,#601030)"><img id="h-art0" src="" style="display:none" alt=""></div><div class="s0-album-title">BUMPA</div><div class="s0-album-artist">비비 (BIBI)</div></div>
-        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art1-wrap" style="background:linear-gradient(135deg,#6080c0,#202060)"><img id="h-art1" src="" style="display:none" alt=""></div><div class="s0-album-title">괜찮아 사랑이니까</div><div class="s0-album-artist">PLAVE</div></div>
-        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art2-wrap" style="background:linear-gradient(135deg,#0080c0,#001040)"><img id="h-art2" src="" style="display:none" alt=""></div><div class="s0-album-title">HYPER LINK: Vol.2</div><div class="s0-album-artist">DXMON (다이몬)</div></div>
-        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art3-wrap" style="background:linear-gradient(135deg,#e0a040,#804010)"><img id="h-art3" src="" style="display:none" alt=""></div><div class="s0-album-title">오로라</div><div class="s0-album-artist">박현규</div></div>
+        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art1-wrap" style="background:linear-gradient(135deg,#6080c0,#202060)"><img id="h-art1" src="" style="display:none" alt=""></div><div class="s0-album-title">괜찮???�랑?�니�?/div><div class="s0-album-artist">PLAVE</div></div>
+        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art2-wrap" style="background:linear-gradient(135deg,#0080c0,#001040)"><img id="h-art2" src="" style="display:none" alt=""></div><div class="s0-album-title">HYPER LINK: Vol.2</div><div class="s0-album-artist">DXMON (?�이�?</div></div>
+        <div class="s0-album-item"><div class="s0-album-thumb" id="h-art3-wrap" style="background:linear-gradient(135deg,#e0a040,#804010)"><img id="h-art3" src="" style="display:none" alt=""></div><div class="s0-album-title">?�로??/div><div class="s0-album-artist">박현�?/div></div>
       </div>
       <div class="s0-chart-header">
-        <div class="s0-chart-label">오늘 18:00 기준</div>
-        <div class="s0-chart-title-row"><div class="s0-chart-title">멜론차트 <svg width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="10" width="3" height="10" rx="1" fill="#18f915"/><rect x="7" y="6" width="3" height="14" rx="1" fill="#18f915"/><rect x="12" y="2" width="3" height="18" rx="1" fill="#18f915"/><rect x="17" y="8" width="3" height="12" rx="1" fill="#18f915"/></svg></div><button class="s0-chart-more">전체보기</button></div>
+        <div class="s0-chart-label">?�늘 18:00 기�?</div>
+        <div class="s0-chart-title-row"><div class="s0-chart-title">멜론차트 <svg width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="10" width="3" height="10" rx="1" fill="#18f915"/><rect x="7" y="6" width="3" height="14" rx="1" fill="#18f915"/><rect x="12" y="2" width="3" height="18" rx="1" fill="#18f915"/><rect x="17" y="8" width="3" height="12" rx="1" fill="#18f915"/></svg></div><button class="s0-chart-more">?�체보기</button></div>
       </div>
-      <div class="s0-tabs"><button class="s0-tab active">TOP100</button><button class="s0-tab">HOT100</button><button class="s0-tab">1995년 해외</button><button class="s0-tab">달달한</button></div>
+      <div class="s0-tabs"><button class="s0-tab active">TOP100</button><button class="s0-tab">HOT100</button><button class="s0-tab">1995???�외</button><button class="s0-tab">?�달??/button></div>
       <div class="s0-songs">
-        <div class="s0-song-item"><span class="s0-song-rank">9</span><div class="s0-song-art" id="s0-sart0-wrap" style="background:linear-gradient(135deg,#2060a0,#081030)"><img id="s0-sart0" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">Drowning</div><div class="s0-song-artist">— WOODZ</div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#2060a0,#081030)"></div></div>
-        <div class="s0-song-item highlight"><span class="s0-song-rank">10</span><div class="s0-song-art" id="s0-sart1-wrap" style="background:linear-gradient(135deg,#8B2252,#C05080)"><img id="s0-sart1" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">404 (New Era)</div><div class="s0-song-artist">— KiiiKiii (키키)</div></div><button class="s0-song-play" onclick="goToPlayer()"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" id="s0-sart1b-wrap" style="background:linear-gradient(135deg,#8B2252,#C05080)"><img id="s0-sart1b" src="" style="display:none" alt=""></div></div>
-        <div class="s0-song-item"><span class="s0-song-rank">11</span><div class="s0-song-art" id="s0-sart2-wrap" style="background:linear-gradient(135deg,#e04060,#600020)"><img id="s0-sart2" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">Heavy Serenade</div><div class="s0-song-artist">— NMIXX</div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#e04060,#600020)"></div></div>
-        <div class="s0-song-item"><span class="s0-song-rank">12</span><div class="s0-song-art" id="s0-sart3-wrap" style="background:linear-gradient(135deg,#80c060,#204010)"><img id="s0-sart3" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">0+0</div><div class="s0-song-artist">— 한로로</div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#80c060,#204010)"></div></div>
+        <div class="s0-song-item"><span class="s0-song-rank">9</span><div class="s0-song-art" id="s0-sart0-wrap" style="background:linear-gradient(135deg,#2060a0,#081030)"><img id="s0-sart0" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">Drowning</div><div class="s0-song-artist">??WOODZ</div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#2060a0,#081030)"></div></div>
+        <div class="s0-song-item highlight"><span class="s0-song-rank">10</span><div class="s0-song-art" id="s0-sart1-wrap" style="background:linear-gradient(135deg,#8B2252,#C05080)"><img id="s0-sart1" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">404 (New Era)</div><div class="s0-song-artist">??KiiiKiii (?�키)</div></div><button class="s0-song-play" onclick="goToPlayer()"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" id="s0-sart1b-wrap" style="background:linear-gradient(135deg,#8B2252,#C05080)"><img id="s0-sart1b" src="" style="display:none" alt=""></div></div>
+        <div class="s0-song-item"><span class="s0-song-rank">11</span><div class="s0-song-art" id="s0-sart2-wrap" style="background:linear-gradient(135deg,#e04060,#600020)"><img id="s0-sart2" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">Heavy Serenade</div><div class="s0-song-artist">??NMIXX</div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#e04060,#600020)"></div></div>
+        <div class="s0-song-item"><span class="s0-song-rank">12</span><div class="s0-song-art" id="s0-sart3-wrap" style="background:linear-gradient(135deg,#80c060,#204010)"><img id="s0-sart3" src="" style="display:none" alt=""></div><div class="s0-song-info"><div class="s0-song-name">0+0</div><div class="s0-song-artist">???�로�?/div></div><button class="s0-song-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><div class="s0-song-art2" style="background:linear-gradient(135deg,#80c060,#204010)"></div></div>
       </div>
-      <button class="s0-play-all"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg> TOP100 전체듣기</button>
+      <button class="s0-play-all"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg> TOP100 ?�체?�기</button>
       <div class="s0-mini">
-        <div class="s0-mini-info"><div class="s0-mini-title">404 (New Era)</div><div class="s0-mini-artist">KiiiKiii (키키)</div></div>
+        <div class="s0-mini-info"><div class="s0-mini-title">404 (New Era)</div><div class="s0-mini-artist">KiiiKiii (?�키)</div></div>
         <div class="s0-mini-ctrl">
           <button class="s0-mini-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></button>
           <button class="s0-mini-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
@@ -809,18 +809,18 @@
         </div>
       </div>
       <div class="s0-bottom-nav">
-        <button class="s0-nav-item active"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>홈</button>
+        <button class="s0-nav-item active"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>??/button>
         <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 8v-4"/><path d="M12 20v-4"/><path d="M8.5 8.5L5.5 5.5"/><path d="M18.5 18.5L15.5 15.5"/></svg>ForYou</button>
-        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>탐색</button>
-        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>음악서랍</button>
-        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>바로가기</button>
+        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>?�색</button>
+        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>?�악?�랍</button>
+        <button class="s0-nav-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>바로가�?/button>
       </div>
     </div>
   </div>
 
 
 
-  <!-- ══ 화면 1: 플레이어 ══ -->
+  <!-- ?�═ ?�면 1: ?�레?�어 ?�═ -->
   <div id="screen1">
     <div class="bg-layer"><div class="bg-blur-orb"></div><div class="bg-grad"></div></div>
     <div class="s1-content">
@@ -836,7 +836,7 @@
         <div class="song-header-row">
           <div>
             <div class="song-title">404 (New Era)</div>
-            <div class="song-artist">kiikii (키키)</div>
+            <div class="song-artist">kiikii (?�키)</div>
           </div>
           <div class="hdr-icons">
             <button class="icon-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
@@ -845,7 +845,7 @@
         </div>
       </div>
       <div class="album-art">
-        <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="앨범 커버"
+        <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="?�범 커버"
              onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#8B2252,#C05080,#E8A0B0,#4A1A3A)'">
       </div>
       <div class="action-btns">
@@ -855,11 +855,11 @@
         </button>
         <button class="btn-pill">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          담기
+          ?�기
         </button>
         <button class="btn-pill btn-mixup" id="btnMixup" onclick="goToMixup()">
           <svg width="14" height="14" viewBox="0 0 24 24"><polygon class="mixup-tri" points="5 3 19 12 5 21 5 3"/></svg>
-          믹스업
+          믹스??
         </button>
       </div>
       <div class="lyrics">
@@ -885,7 +885,7 @@
     </div>
   </div>
 
-  <!-- ══ 믹스업 오버레이 (화면1 위에 뜨는 바텀시트) ══ -->
+  <!-- ?�═ 믹스???�버?�이 (?�면1 ?�에 ?�는 바�??�트) ?�═ -->
   <div id="mixup-overlay">
     <div class="bottom-sheet">
       <div class="sheet-handle" onclick="closeMixupSheet()" style="cursor:pointer;"></div>
@@ -896,22 +896,22 @@
         </div>
         <button class="sheet-refresh" onclick="refreshMixup()">
           <svg class="refresh-icon" id="refreshIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-          새로고침
+          ?�로고침
         </button>
       </div>
       <div class="sheet-sub">
-        현재 듣는 흐름 기반 추천
+        ?�재 ?�는 ?�름 기반 추천
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       </div>
       <div class="track-list" id="mixup-track-list"></div>
       <button class="add-playlist-btn" onclick="goToPlaylist()">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/><polygon points="17 17 21 19 17 21" fill="white" stroke="none"/></svg>
-        재생목록에 담기
+        ?�생목록???�기
       </button>
     </div>
   </div>
 
-  <!-- ══ 화면 2: Mixup Picks ══ -->
+  <!-- ?�═ ?�면 2: Mixup Picks ?�═ -->
   <div id="screen2">
     <div class="bg-layer"><div class="bg-blur-orb"></div><div class="bg-grad"></div></div>
     <div class="s2-content">
@@ -923,17 +923,17 @@
           <div class="batt"><div class="batt-body"><div class="batt-fill"></div></div><span class="batt-pct">71</span></div>
         </div>
       </div>
-      <div class="s2-now"><span class="s2-now-border">현재 재생</span></div>
+      <div class="s2-now"><span class="s2-now-border">?�재 ?�생</span></div>
       <div class="s2-song-row">
         <button class="s2-dots" onclick="openModal()"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
         <div class="s2-song-info">
           <div class="s2-title">404 (New Era)</div>
-          <div class="s2-artist">kiikii (키키)</div>
+          <div class="s2-artist">kiikii (?�키)</div>
         </div>
         <button class="s2-chevron" onclick="goToAlbum()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
       </div>
       <div class="s2-album">
-        <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="앨범 커버"
+        <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="?�범 커버"
              onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#8B2252,#C05080,#E8A0B0,#4A1A3A)'">
       </div>
       <div class="s2-mid">
@@ -944,11 +944,11 @@
           </button>
           <button class="btn-pill">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            담기
+            ?�기
           </button>
           <button class="btn-pill btn-mixup active" id="s2BtnMixup" onclick="toggleSheet()">
             <svg width="14" height="14" viewBox="0 0 24 24"><polygon class="mixup-tri" points="5 3 19 12 5 21 5 3"/></svg>
-            믹스업
+            믹스??
           </button>
         </div>
         <div class="s2-prog">
@@ -957,7 +957,7 @@
         </div>
       </div>
 
-      <!-- 바텀 시트 -->
+      <!-- 바�? ?�트 -->
       <div class="bottom-sheet">
         <div class="sheet-handle" onclick="collapseSheet()" style="cursor:pointer;"></div>
         <div class="sheet-header">
@@ -967,19 +967,19 @@
           </div>
           <button class="sheet-refresh">
             <svg class="refresh-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-            새로고침
+            ?�로고침
           </button>
         </div>
         <div class="sheet-sub">
-          현재 듣는 흐름 기반 추천
+          ?�재 ?�는 ?�름 기반 추천
         </div>
         <div class="track-list"></div>
-        <button class="add-playlist-btn">재생목록에 담기</button>
+        <button class="add-playlist-btn">?�생목록???�기</button>
       </div>
     </div>
   </div>
 
-  <!-- ══ 화면 3: 재생목록 ══ -->
+  <!-- ?�═ ?�면 3: ?�생목록 ?�═ -->
   <div id="screen3">
     <div class="bg-layer"><div class="bg-blur-orb"></div><div class="bg-grad"></div></div>
     <div class="s3-content">
@@ -992,19 +992,19 @@
         </div>
       </div>
 
-      <!-- 이전 버튼 -->
+      <!-- ?�전 버튼 -->
       <div class="s3-topbar">
         <button class="s3-back-btn" onclick="backToMixup()">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-          이전
+          ?�전
         </button>
       </div>
 
-      <!-- 상단 탭 -->
+      <!-- ?�단 ??-->
       <div class="s3-tabs">
         <div class="s3-tab-group">
-          <button class="s3-tab active" id="tabPlaylist" onclick="showS3Tab('playlist')">재생목록</button>
-          <button class="s3-tab" id="tabDrawer" onclick="showS3Tab('drawer')">음악서랍</button>
+          <button class="s3-tab active" id="tabPlaylist" onclick="showS3Tab('playlist')">?�생목록</button>
+          <button class="s3-tab" id="tabDrawer" onclick="showS3Tab('drawer')">?�악?�랍</button>
         </div>
         <div class="s3-tab-icons">
           <button class="s3-tab-icon-btn">
@@ -1016,139 +1016,139 @@
         </div>
       </div>
 
-      <!-- 재생목록 패널 -->
+      <!-- ?�생목록 ?�널 -->
       <div class="s3-playlist-content" id="s3-playlist-tab">
-        <!-- 빈 상태 -->
+        <!-- �??�태 -->
         <div class="s3-empty" id="s3-empty">
           <svg class="s3-empty-icon" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
             <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/>
             <line x1="3" y1="18" x2="15" y2="18"/>
             <polygon points="17 17 21 19 17 21" fill="white" stroke="none"/>
           </svg>
-          <p>아직 추가된 곡이 없어요<br>Mixup Picks에서 + 버튼을 눌러<br>곡을 추가해보세요</p>
+          <p>?�직 추�???곡이 ?�어??br>Mixup Picks?�서 + 버튼???�러<br>곡을 추�??�보?�요</p>
         </div>
-        <!-- 추가된 곡 목록 -->
+        <!-- 추�???�?목록 -->
         <div class="s3-list" id="s3-list" style="display:none;"></div>
         <div class="s3-footer" id="s3-footer" style="display:none;">
           <button class="s3-play-all">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="black"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            전체 재생
+            ?�체 ?�생
           </button>
           <span class="s3-count-label" id="s3-footer-count"></span>
         </div>
       </div>
 
-      <!-- 음악서랍 패널 -->
+      <!-- ?�악?�랍 ?�널 -->
       <div class="s3-drawer-content" id="s3-drawer-tab">
-        <!-- 가로 필터 탭 -->
+        <!-- 가�??�터 ??-->
         <div class="s3-drawer-filter-bar">
-          <button class="s3-drawer-filter-btn active" id="dfilter-playlist" onclick="showDrawerFilter('playlist')">플레이리스트</button>
-          <button class="s3-drawer-filter-btn" id="dfilter-like" onclick="showDrawerFilter('like')">좋아요</button>
-          <button class="s3-drawer-filter-btn" id="dfilter-recent" onclick="showDrawerFilter('recent')">최근들은</button>
+          <button class="s3-drawer-filter-btn active" id="dfilter-playlist" onclick="showDrawerFilter('playlist')">?�레?�리?�트</button>
+          <button class="s3-drawer-filter-btn" id="dfilter-like" onclick="showDrawerFilter('like')">좋아??/button>
+          <button class="s3-drawer-filter-btn" id="dfilter-recent" onclick="showDrawerFilter('recent')">최근?��?</button>
         </div>
 
-        <!-- 플레이리스트 패널 -->
+        <!-- ?�레?�리?�트 ?�널 -->
         <div class="s3-drawer-panel active" id="dpanel-playlist">
           <div class="s3-drawer-item" id="liked-songs-item" onclick="completeTask2()" style="cursor:pointer;">
             <div class="s3-drawer-art" id="pinnedArt" style="background:linear-gradient(135deg,#8B2252,#C05080);">
               <img id="pinnedImg" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
             </div>
             <div class="s3-drawer-info">
-              <div class="s3-drawer-name">좋아요 표시한 곡</div>
+              <div class="s3-drawer-name">좋아???�시??�?/div>
               <div class="s3-drawer-sub" style="display:flex;align-items:center;gap:4px;">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="#18f915"><path d="M17 4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v1l1.5 5.5L8 12h3v8l1 2 1-2v-8h3l-.5-1.5L17 5V4z"/></svg>
-                34곡
+                34�?
               </div>
             </div>
             <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
           </div>
         </div>
 
-        <!-- 좋아요 패널 -->
+        <!-- 좋아???�널 -->
         <div class="s3-drawer-panel" id="dpanel-like">
-          <!-- 세로 메뉴: 앨범 / 아티스트 / 곡 -->
+          <!-- ?�로 메뉴: ?�범 / ?�티?�트 / �?-->
           <div class="s3-like-menu" id="like-menu">
             <button class="s3-like-menu-row" onclick="showLikeSub('album')">
-              <span class="s3-like-menu-label">앨범</span>
+              <span class="s3-like-menu-label">?�범</span>
               <span class="s3-like-menu-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></span>
             </button>
             <button class="s3-like-menu-row" onclick="showLikeSub('artist')">
-              <span class="s3-like-menu-label">아티스트</span>
+              <span class="s3-like-menu-label">?�티?�트</span>
               <span class="s3-like-menu-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></span>
             </button>
             <button class="s3-like-menu-row" onclick="showLikeSub('song')">
-              <span class="s3-like-menu-label">곡</span>
+              <span class="s3-like-menu-label">�?/span>
               <span class="s3-like-menu-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></span>
             </button>
           </div>
 
-          <!-- 앨범 서브패널 -->
+          <!-- ?�범 ?�브?�널 -->
           <div class="s3-like-subpanel" id="lsubpanel-album">
-            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>앨범</button></div>
+            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>?�범</button></div>
             <div class="s3-drawer-item">
               <div class="s3-drawer-art" id="likeArt1" style="background:linear-gradient(135deg,#8B2252,#C05080);border-radius:6px;">
                 <img id="likeImg1" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
               </div>
-              <div class="s3-drawer-info"><div class="s3-drawer-name">Delulu Pack</div><div class="s3-drawer-sub">KiiiKiii (키키) · 6곡</div></div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">Delulu Pack</div><div class="s3-drawer-sub">KiiiKiii (?�키) · 6�?/div></div>
               <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
             </div>
             <div class="s3-drawer-item">
               <div class="s3-drawer-art" id="likeArt2" style="background:linear-gradient(135deg,#d4a0c0,#8b4060);border-radius:6px;">
                 <img id="likeImg2" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
               </div>
-              <div class="s3-drawer-info"><div class="s3-drawer-name">ILLIT 1st Mini Album</div><div class="s3-drawer-sub">ILLIT · 5곡</div></div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">ILLIT 1st Mini Album</div><div class="s3-drawer-sub">ILLIT · 5�?/div></div>
               <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
             </div>
             <div class="s3-drawer-item">
               <div class="s3-drawer-art" id="likeArt3" style="background:linear-gradient(135deg,#40a0e0,#102060);border-radius:6px;">
                 <img id="likeImg3" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
               </div>
-              <div class="s3-drawer-info"><div class="s3-drawer-name">ELEVEN</div><div class="s3-drawer-sub">IVE · 1곡</div></div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">ELEVEN</div><div class="s3-drawer-sub">IVE · 1�?/div></div>
               <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
             </div>
           </div>
 
-          <!-- 아티스트 서브패널 -->
+          <!-- ?�티?�트 ?�브?�널 -->
           <div class="s3-like-subpanel" id="lsubpanel-artist">
-            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>아티스트</button></div>
+            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>?�티?�트</button></div>
             <div class="s3-drawer-item">
               <div class="s3-drawer-art" style="background:linear-gradient(135deg,#8B2252,#C05080);border-radius:50%;">
                 <img id="likeArtistImg1" src="" style="width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;" alt="">
               </div>
-              <div class="s3-drawer-info"><div class="s3-drawer-name">KiiiKiii (키키)</div><div class="s3-drawer-sub">아티스트</div></div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">KiiiKiii (?�키)</div><div class="s3-drawer-sub">?�티?�트</div></div>
               <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
             </div>
             <div class="s3-drawer-item">
               <div class="s3-drawer-art" style="background:linear-gradient(135deg,#d4a0c0,#8b4060);border-radius:50%;">
                 <img id="likeArtistImg2" src="" style="width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;" alt="">
               </div>
-              <div class="s3-drawer-info"><div class="s3-drawer-name">ILLIT</div><div class="s3-drawer-sub">아티스트</div></div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">ILLIT</div><div class="s3-drawer-sub">?�티?�트</div></div>
               <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
             </div>
             <div class="s3-drawer-item">
               <div class="s3-drawer-art" style="background:linear-gradient(135deg,#6040e0,#100050);border-radius:50%;">
                 <img id="likeArtistImg3" src="" style="width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;" alt="">
               </div>
-              <div class="s3-drawer-info"><div class="s3-drawer-name">aespa</div><div class="s3-drawer-sub">아티스트</div></div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">aespa</div><div class="s3-drawer-sub">?�티?�트</div></div>
               <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
             </div>
             <div class="s3-drawer-item">
               <div class="s3-drawer-art" style="background:linear-gradient(135deg,#40a0e0,#102060);border-radius:50%;">
                 <img id="likeArtistImg4" src="" style="width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;" alt="">
               </div>
-              <div class="s3-drawer-info"><div class="s3-drawer-name">IVE</div><div class="s3-drawer-sub">아티스트</div></div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">IVE</div><div class="s3-drawer-sub">?�티?�트</div></div>
               <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
             </div>
           </div>
 
-          <!-- 곡 서브패널 -->
+          <!-- �??�브?�널 -->
           <div class="s3-like-subpanel" id="lsubpanel-song">
-            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>곡</button></div>
+            <div class="s3-like-subheader"><button class="s3-like-back" onclick="showLikeSub(null)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>�?/button></div>
             <div class="s3-drawer-item">
               <div class="s3-drawer-art" id="likeArt4" style="background:linear-gradient(135deg,#8B2252,#C05080);">
                 <img id="likeImg4" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
               </div>
-              <div class="s3-drawer-info"><div class="s3-drawer-name">404 (New Era)</div><div class="s3-drawer-sub">KiiiKiii (키키)</div></div>
+              <div class="s3-drawer-info"><div class="s3-drawer-name">404 (New Era)</div><div class="s3-drawer-sub">KiiiKiii (?�키)</div></div>
               <button class="s3-drawer-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
             </div>
             <div class="s3-drawer-item">
@@ -1182,7 +1182,7 @@
           </div>
         </div>
 
-        <!-- 최근들은 패널 -->
+        <!-- 최근?��? ?�널 -->
         <div class="s3-drawer-panel" id="dpanel-recent">
           <div class="s3-drawer-item">
             <div class="s3-drawer-art" id="recentArt1" style="background:linear-gradient(135deg,#6040e0,#100050);">
@@ -1226,9 +1226,9 @@
   </div>
 
 
-  <!-- ══ 화면 4: 앨범 상세 (Delulu Pack) ══ -->
+  <!-- ?�═ ?�면 4: ?�범 ?�세 (Delulu Pack) ?�═ -->
   <div id="screen4">
-    <!-- 상태바 -->
+    <!-- ?�태�?-->
     <div class="s4-statusbar">
       <span class="status-time">6:48</span>
       <div class="status-right">
@@ -1238,7 +1238,7 @@
       </div>
     </div>
 
-    <!-- 상단 바 -->
+    <!-- ?�단 �?-->
     <div class="s4-topbar">
       <button class="s4-back" onclick="backFromAlbum()">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1249,27 +1249,27 @@
       </button>
     </div>
 
-    <!-- 스크롤 가능한 콘텐츠 -->
+    <!-- ?�크�?가?�한 콘텐�?-->
     <div class="s4-scroll">
 
-    <!-- 앨범 커버 -->
+    <!-- ?�범 커버 -->
     <div class="s4-album-cover">
       <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="Delulu Pack"
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#8B2252,#C05080,#E8A0B0,#4A1A3A)'">
     </div>
-    <!-- 앨범 제목 -->
+    <!-- ?�범 ?�목 -->
     <div class="s4-album-name">Delulu Pack</div>
 
-    <!-- 아티스트 행 -->
+    <!-- ?�티?�트 ??-->
     <div class="s4-artist-row">
       <div class="s4-artist-thumb">
         <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt=""
              onerror="this.style.display='none'">
       </div>
-      <span class="s4-artist-name">KiiiKiii (키키)</span>
+      <span class="s4-artist-name">KiiiKiii (?�키)</span>
     </div>
 
-    <!-- 통계 행 -->
+    <!-- ?�계 ??-->
     <div class="s4-stats-row">
       <div class="s4-stat">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -1284,41 +1284,41 @@
       </button>
     </div>
 
-    <!-- 액션 버튼 행 -->
+    <!-- ?�션 버튼 ??-->
     <div class="s4-action-row">
       <button class="s4-action-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        전체
+        ?�체
       </button>
       <button class="s4-action-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
-        셔플
+        ?�플
       </button>
       <button class="s4-action-btn" onclick="backFromAlbum(); goToMixup();">
         <div class="s4-mixup-icon">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
-        믹스업
+        믹스??
       </button>
     </div>
 
-    <!-- 트랙 헤더 -->
+    <!-- ?�랙 ?�더 -->
     <div class="s4-list-header">
       <button class="s4-select-all">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        전체선택
+        ?�체?�택
       </button>
-      <span class="s4-track-count">6곡 · 17분 16초</span>
+      <span class="s4-track-count">6�?· 17�?16�?/span>
     </div>
 
-    <!-- 트랙 목록 -->
+    <!-- ?�랙 목록 -->
     <div class="s4-track-list">
       <!-- 01 -->
       <div class="s4-track-item">
         <span class="s4-num">01</span>
         <div class="s4-track-info">
           <div class="s4-track-title-row"><span class="s4-track-name">Delulu</span></div>
-          <div class="s4-track-artist">KiiiKiii (키키)</div>
+          <div class="s4-track-artist">KiiiKiii (?�키)</div>
         </div>
         <div class="s4-track-actions">
           <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
@@ -1333,7 +1333,7 @@
             <span class="s4-title-badge">TITLE</span>
             <span class="s4-track-name">404 (New Era)</span>
           </div>
-          <div class="s4-track-artist">KiiiKiii (키키)</div>
+          <div class="s4-track-artist">KiiiKiii (?�키)</div>
         </div>
         <div class="s4-track-actions">
           <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
@@ -1345,7 +1345,7 @@
         <span class="s4-num">03</span>
         <div class="s4-track-info">
           <div class="s4-track-title-row"><span class="s4-track-name">UNDERDOGS</span></div>
-          <div class="s4-track-artist">KiiiKiii (키키)</div>
+          <div class="s4-track-artist">KiiiKiii (?�키)</div>
         </div>
         <div class="s4-track-actions">
           <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
@@ -1357,7 +1357,7 @@
         <span class="s4-num">04</span>
         <div class="s4-track-info">
           <div class="s4-track-title-row"><span class="s4-track-name">명냥</span></div>
-          <div class="s4-track-artist">KiiiKiii (키키)</div>
+          <div class="s4-track-artist">KiiiKiii (?�키)</div>
         </div>
         <div class="s4-track-actions">
           <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
@@ -1369,7 +1369,7 @@
         <span class="s4-num">05</span>
         <div class="s4-track-info">
           <div class="s4-track-title-row"><span class="s4-track-name">Dizzy</span></div>
-          <div class="s4-track-artist">KiiiKiii (키키)</div>
+          <div class="s4-track-artist">KiiiKiii (?�키)</div>
         </div>
         <div class="s4-track-actions">
           <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
@@ -1381,7 +1381,7 @@
         <span class="s4-num">06</span>
         <div class="s4-track-info">
           <div class="s4-track-title-row"><span class="s4-track-name">To Me From Me (Prod.TABLO)</span></div>
-          <div class="s4-track-artist">KiiiKiii (키키)</div>
+          <div class="s4-track-artist">KiiiKiii (?�키)</div>
         </div>
         <div class="s4-track-actions">
           <button class="s4-track-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
@@ -1390,25 +1390,25 @@
       </div>
     </div><!-- /s4-track-list -->
 
-    <!-- 앨범 소개 -->
+    <!-- ?�범 ?�개 -->
     <div class="s4-album-intro">
       <div class="s4-intro-header">
-        <span class="s4-intro-title">앨범 소개</span>
-        <button class="s4-intro-more">전체보기</button>
+        <span class="s4-intro-title">?�범 ?�개</span>
+        <button class="s4-intro-more">?�체보기</button>
       </div>
       <table class="s4-intro-table">
-        <tr><td>유형</td><td>미니</td></tr>
-        <tr><td>장르</td><td>팝/댄스</td></tr>
-        <tr><td>발매일</td><td>2024.01.15</td></tr>
-        <tr><td>발매사</td><td>HYBE</td></tr>
-        <tr><td>기획사</td><td>Big Hit Music</td></tr>
+        <tr><td>?�형</td><td>미니</td></tr>
+        <tr><td>?�르</td><td>???�스</td></tr>
+        <tr><td>발매??/td><td>2024.01.15</td></tr>
+        <tr><td>발매??/td><td>HYBE</td></tr>
+        <tr><td>기획??/td><td>Big Hit Music</td></tr>
       </table>
       <div class="s4-intro-desc">Delulu Pack [Credit] 01. DeluluComposed by KiiiKiii, TABLOArranged by TABLOLyrics by KiiiKiii, TABLO 02. 404 (New Era)Composed by KiiiKiii, Matt AlexArranged by Matt AlexLyrics by KiiiKiii 03. UNDERDOGSComposed by KiiiKiii, Yelin ParkArranged by Yelin ParkLyrics by KiiiKiii, Raf Sandou 04. 명냥Composed by KiiiKiii, Sean KimArranged by Sean KimLyrics by KiiiKiii...</div>
     </div>
 
     </div><!-- /s4-scroll -->
 
-    <!-- 미니 플레이어 -->
+    <!-- 미니 ?�레?�어 -->
     <div class="s4-mini-player">
       <div class="s4-mini-info">
         <div class="s4-mini-title">404 (New Era)</div>
@@ -1422,11 +1422,11 @@
       </div>
     </div>
 
-    <!-- 바텀 내비 -->
+    <!-- 바�? ?�비 -->
     <div class="s4-bottom-nav">
       <button class="s4-nav-item">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        홈
+        ??
       </button>
       <button class="s4-nav-item">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 8v-4"/><path d="M12 20v-4"/><path d="M8.5 8.5L5.5 5.5"/><path d="M18.5 18.5L15.5 15.5"/></svg>
@@ -1434,22 +1434,22 @@
       </button>
       <button class="s4-nav-item active">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        탐색
+        ?�색
       </button>
       <button class="s4-nav-item">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-        음악서랍
+        ?�악?�랍
       </button>
       <button class="s4-nav-item">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        바로가기
+        바로가�?
       </button>
     </div>
   </div>
 
-  <!-- ══ 더보기 모달 ══ -->
+  <!-- ?�═ ?�보�?모달 ?�═ -->
   <div id="song-modal">
-    <!-- 상태바 -->
+    <!-- ?�태�?-->
     <div class="modal-status">
       <span class="modal-status-time">6:48</span>
       <div class="status-right">
@@ -1459,7 +1459,7 @@
       </div>
     </div>
 
-    <!-- AAC 배지 -->
+    <!-- AAC 배�? -->
     <div class="modal-aac-badge">
       <div class="aac-pill">
         <div class="aac-wave">
@@ -1469,27 +1469,27 @@
       </div>
     </div>
 
-    <!-- 앨범 아트 -->
+    <!-- ?�범 ?�트 -->
     <div class="modal-art">
-      <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="앨범 커버"
+      <img src="https://www.figma.com/api/mcp/asset/37d1d08b-1a9b-429a-a3a9-79d269470103" alt="?�범 커버"
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#8B2252,#C05080,#E8A0B0,#4A1A3A)'">
     </div>
 
-    <!-- 곡 정보 -->
+    <!-- �??�보 -->
     <div class="modal-song-info">
       <div class="modal-song-title">404 (New Era)</div>
-      <div class="modal-song-artist">KiiiKiii (키키)</div>
+      <div class="modal-song-artist">KiiiKiii (?�키)</div>
     </div>
 
-    <!-- 아이콘 버튼 행 -->
+    <!-- ?�이�?버튼 ??-->
     <div class="modal-icons">
       <button class="modal-icon-btn">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        <span>담기</span>
+        <span>?�기</span>
       </button>
       <button class="modal-icon-btn">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>저장</span>
+        <span>?�??/span>
       </button>
       <button class="modal-icon-btn btn-heart" id="btnHeart3" onclick="toggleHeart()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path class="heart-path" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -1505,45 +1505,45 @@
       </button>
     </div>
 
-    <!-- 믹스업 버튼 -->
+    <!-- 믹스??버튼 -->
     <button class="modal-mixup-btn" onclick="closeModal(); goToMixup();">
       <div class="mixup-icon">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       </div>
-      이 곡으로 믹스업
+      ??곡으�?믹스??
     </button>
 
     <div class="modal-divider"></div>
 
     <!-- 메뉴 목록 -->
     <div class="modal-menu">
-      <button class="modal-menu-item">곡정보</button>
-      <button class="modal-menu-item">앨범정보</button>
-      <button class="modal-menu-item">아티스트 채널</button>
-      <button class="modal-menu-item">뮤직비디오</button>
-      <button class="modal-menu-item">유사한 곡 보기</button>
-      <button class="modal-menu-item disabled">카카오톡 프로필 뮤직 설정</button>
+      <button class="modal-menu-item">곡정�?/button>
+      <button class="modal-menu-item">?�범?�보</button>
+      <button class="modal-menu-item">?�티?�트 채널</button>
+      <button class="modal-menu-item">뮤직비디??/button>
+      <button class="modal-menu-item">?�사??�?보기</button>
+      <button class="modal-menu-item disabled">카카?�톡 ?�로??뮤직 ?�정</button>
     </div>
 
-    <!-- 닫기 -->
+    <!-- ?�기 -->
     <div class="modal-close-bar">
-      <button class="modal-close-btn" onclick="closeModal()">닫기</button>
+      <button class="modal-close-btn" onclick="closeModal()">?�기</button>
     </div>
   </div>
 
-  <!-- ══ 설문 모달 ══ -->
+  <!-- ?�═ ?�문 모달 ?�═ -->
   <div id="survey-modal">
     <div id="survey-form-view" style="display:flex;flex-direction:column;flex:1;">
       <div class="survey-header">
         <div class="task-badge" style="margin-bottom:12px;">과업 1</div>
         <div id="survey1-result-msg" class="survey-result-msg"></div>
         <div id="survey1-result-sub" class="survey-result-sub"></div>
-        <div class="survey-sub">솔직하게 답해주세요</div>
+        <div class="survey-sub">?�직?�게 ?�해주세??/div>
       </div>
       <div class="survey-body">
         <div class="survey-q">
           <div class="survey-q-badge">Q1</div>
-          <div class="survey-q-label">추천곡 추가 과정이 직관적이고 쉬웠나요?</div>
+          <div class="survey-q-label">추천�?추�? 과정??직�??�이�??�웠?�요?</div>
           <div class="survey-scale">
             <button class="survey-scale-btn" onclick="selectScore('q1',1,this)">1</button>
             <button class="survey-scale-btn" onclick="selectScore('q1',2,this)">2</button>
@@ -1551,11 +1551,11 @@
             <button class="survey-scale-btn" onclick="selectScore('q1',4,this)">4</button>
             <button class="survey-scale-btn" onclick="selectScore('q1',5,this)">5</button>
           </div>
-          <div class="survey-scale-label"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+          <div class="survey-scale-label"><span>?��? 그렇지 ?�다</span><span>매우 그렇??/span></div>
         </div>
         <div class="survey-q">
           <div class="survey-q-badge">Q2</div>
-          <div class="survey-q-label">기존보다 플레이리스트 UX가 간편해졌나요?</div>
+          <div class="survey-q-label">기존보다 ?�레?�리?�트 UX가 간편?�졌?�요?</div>
           <div class="survey-scale">
             <button class="survey-scale-btn" onclick="selectScore('q2',1,this)">1</button>
             <button class="survey-scale-btn" onclick="selectScore('q2',2,this)">2</button>
@@ -1563,49 +1563,49 @@
             <button class="survey-scale-btn" onclick="selectScore('q2',4,this)">4</button>
             <button class="survey-scale-btn" onclick="selectScore('q2',5,this)">5</button>
           </div>
-          <div class="survey-scale-label"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+          <div class="survey-scale-label"><span>?��? 그렇지 ?�다</span><span>매우 그렇??/span></div>
         </div>
       </div>
-      <button class="survey-submit" id="survey-submit-btn" onclick="submitSurvey1()" disabled>다음 과업으로 →</button>
+      <button class="survey-submit" id="survey-submit-btn" onclick="submitSurvey1()" disabled>?�음 과업?�로 ??/button>
     </div>
     <div id="survey-done-view" class="survey-done" style="display:none;">
-      <div class="survey-done-icon">✅</div>
-      <div class="survey-done-title">과업 1 완료!</div>
-      <div class="survey-done-sub">잠시 후 과업 2가 시작됩니다.</div>
+      <div class="survey-done-icon">??/div>
+      <div class="survey-done-title">과업 1 ?�료!</div>
+      <div class="survey-done-sub">?�시 ??과업 2가 ?�작?�니??</div>
     </div>
   </div>
 
-<!-- ══ 과업1 지시 오버레이 ══ -->
+<!-- ?�═ 과업1 지???�버?�이 ?�═ -->
   <div id="task-overlay">
     <div class="task-badge">과업 1 / 2</div>
-    <div class="task-title">음악을 듣다가 믹스업 기능을 찾아서,<br>추천곡 1개를 재생목록에 담아보세요</div>
-    <div class="task-time-hint">⏱ 제한 시간 30초</div>
-    <button class="task-start-btn" onclick="startTask1()">시작하기</button>
+    <div class="task-title">?�악???�다가 믹스??기능??찾아??<br>추천�?1개�? ?�생목록???�아보세??/div>
+    <div class="task-time-hint">???�한 ?�간 30�?/div>
+    <button class="task-start-btn" onclick="startTask1()">?�작?�기</button>
   </div>
 
   <div id="success-toast"></div>
 
-  <!-- ══ 과업2 지시 오버레이 ══ -->
+  <!-- ?�═ 과업2 지???�버?�이 ?�═ -->
   <div id="task2-overlay">
     <div class="task-badge">과업 2 / 2</div>
-    <div class="task-title">좋아요 한 음악들이 어디에<br>모여있는지 찾아보세요</div>
-    <div class="task-time-hint">⏱ 제한 시간 30초</div>
-    <button class="task-start-btn" onclick="startTask2()">시작하기</button>
+    <div class="task-title">좋아?????�악?�이 ?�디??br>모여?�는지 찾아보세??/div>
+    <div class="task-time-hint">???�한 ?�간 30�?/div>
+    <button class="task-start-btn" onclick="startTask2()">?�작?�기</button>
   </div>
 
-  <!-- ══ 과업2 설문 ══ -->
+  <!-- ?�═ 과업2 ?�문 ?�═ -->
   <div id="survey2-modal">
     <div id="survey2-form-view" style="display:flex;flex-direction:column;flex:1;">
       <div class="survey-header">
-        <div class="task-badge" style="margin-bottom:12px;">과업 2 완료</div>
+        <div class="task-badge" style="margin-bottom:12px;">과업 2 ?�료</div>
         <div id="survey2-result-msg" class="survey-result-msg"></div>
         <div id="survey2-result-sub" class="survey-result-sub"></div>
-        <div class="survey-sub">솔직하게 답해주세요</div>
+        <div class="survey-sub">?�직?�게 ?�해주세??/div>
       </div>
       <div class="survey-body">
         <div class="survey-q">
           <div class="survey-q-badge">Q1</div>
-          <div class="survey-q-label">음악서랍에서 좋아요 앨범을 쉽게 찾을 수 있었나요?</div>
+          <div class="survey-q-label">?�악?�랍?�서 좋아???�범???�게 찾을 ???�었?�요?</div>
           <div class="survey-scale">
             <button class="survey-scale-btn" onclick="selectScore2('q1',1,this)">1</button>
             <button class="survey-scale-btn" onclick="selectScore2('q1',2,this)">2</button>
@@ -1613,11 +1613,11 @@
             <button class="survey-scale-btn" onclick="selectScore2('q1',4,this)">4</button>
             <button class="survey-scale-btn" onclick="selectScore2('q1',5,this)">5</button>
           </div>
-          <div class="survey-scale-label"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+          <div class="survey-scale-label"><span>?��? 그렇지 ?�다</span><span>매우 그렇??/span></div>
         </div>
         <div class="survey-q">
           <div class="survey-q-badge">Q2</div>
-          <div class="survey-q-label">좋아요 곡이 자동으로 모여있는 게 유용하다고 느꼈나요?</div>
+          <div class="survey-q-label">좋아??곡이 ?�동?�로 모여?�는 �??�용?�다�??�꼈?�요?</div>
           <div class="survey-scale">
             <button class="survey-scale-btn" onclick="selectScore2('q2',1,this)">1</button>
             <button class="survey-scale-btn" onclick="selectScore2('q2',2,this)">2</button>
@@ -1625,28 +1625,28 @@
             <button class="survey-scale-btn" onclick="selectScore2('q2',4,this)">4</button>
             <button class="survey-scale-btn" onclick="selectScore2('q2',5,this)">5</button>
           </div>
-          <div class="survey-scale-label"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+          <div class="survey-scale-label"><span>?��? 그렇지 ?�다</span><span>매우 그렇??/span></div>
         </div>
       </div>
-      <button class="survey-submit" id="survey2-submit-btn" onclick="submitSurvey2()" disabled>제출하기</button>
+      <button class="survey-submit" id="survey2-submit-btn" onclick="submitSurvey2()" disabled>?�출?�기</button>
     </div>
     <div id="survey2-done-view" class="survey-done" style="display:none;">
-      <div class="survey-done-icon">✅</div>
-      <div class="survey-done-title">모든 과업 완료!</div>
-      <div class="survey-done-sub">참여해주셔서 감사합니다 😊</div>
+      <div class="survey-done-icon">??/div>
+      <div class="survey-done-title">모든 과업 ?�료!</div>
+      <div class="survey-done-sub">참여?�주?�서 감사?�니???��</div>
     </div>
   </div>
 
 </div>
 
 <script>
-  // ── Supabase 연결 (안전하게 초기화) ──
+  // ?�?� Supabase ?�결 (?�전?�게 초기?? ?�?�
   const SUPA_URL = 'https://brvywbbptxdhbeqnpnry.supabase.co';
-  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJydnl3YmJwdHhkaGJlcW5wbnJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2NTkyMzQsImV4cCI6MjA5NzIzNTIzNH0.00qeqqFJJPXbWYECcw4MvIBcd5B6EnlwKVECjLcPkW4';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.00qeqqFJJPXbWYECcw4MvIBcd5B6EnlwKVECjLcPkW4';
   let db = null;
   try {
     if (window.supabase) db = window.supabase.createClient(SUPA_URL, SUPA_KEY);
-  } catch(e) { console.warn('Supabase 초기화 실패 (데이터 저장 없이 진행):', e); }
+  } catch(e) { console.warn('Supabase 초기???�패 (?�이???�???�이 진행):', e); }
 
   const sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2,6);
   let task1StartTime = null;
@@ -1661,13 +1661,13 @@
     } catch(e) { console.warn('track error:', e); }
   }
 
-  // ── 과업1 카운트다운 ──
+  // ?�?� 과업1 카운?�다???�?�
   let task1Success = false;
   let survey1Shown = false;
 
   function updateCountdownDisplay() {
     document.querySelectorAll('.status-time').forEach(el => {
-      el.textContent = timeLeft + '초';
+      el.textContent = timeLeft + '�?;
       el.classList.toggle('countdown-warn', timeLeft <= 5);
     });
   }
@@ -1700,16 +1700,16 @@
     const msg = document.getElementById('survey1-result-msg');
     const sub = document.getElementById('survey1-result-sub');
     if (task1Success) {
-      msg.textContent = '완료했어요! 🎉';
-      sub.textContent = '30초 안에 추천곡을 담으셨어요';
+      msg.textContent = '?�료?�어?? ?��';
+      sub.textContent = '30�??�에 추천곡을 ?�으?�어??;
     } else {
-      msg.textContent = '시간이 초과됐어요';
-      sub.textContent = '괜찮아요! 잠깐 질문 2개만요';
+      msg.textContent = '?�간??초과?�어??;
+      sub.textContent = '괜찮?�요! ?�깐 질문 2개만??;
     }
     document.getElementById('survey-modal').classList.add('open');
   }
 
-  // ── 설문 관련 ──
+  // ?�?� ?�문 관???�?�
   const surveyScores = { q1: null, q2: null };
   function selectScore(key, val, btn) {
     surveyScores[key] = val;
@@ -1730,14 +1730,14 @@
     } catch(e) { console.warn('survey error:', e); }
     document.getElementById('survey-form-view').style.display = 'none';
     document.getElementById('survey-done-view').style.display = 'flex';
-    // 3초 후 과업2 시작 (추후 구현)
+    // 3�???과업2 ?�작 (추후 구현)
     setTimeout(() => {
       document.getElementById('survey-modal').classList.remove('open');
       document.getElementById('task2-overlay').classList.add('show');
     }, 2500);
   }
 
-  // ── 과업2 ──
+  // ?�?� 과업2 ?�?�
   let task2Completed = false;
   let countdown2Timer = null;
   let timeLeft2 = 30;
@@ -1746,7 +1746,7 @@
     document.getElementById('task2-overlay').classList.remove('show');
     document.getElementById('task2-overlay').style.display = 'none';
 
-    // ── 화면 리셋: 홈(screen0)으로 돌아가기 ──
+    // ?�?� ?�면 리셋: ??screen0)?�로 ?�아가�??�?�
     document.getElementById('screen0').classList.remove('slide-out');
     document.getElementById('screen3').classList.remove('slide-in');
     document.getElementById('mixup-overlay').classList.remove('open');
@@ -1772,7 +1772,7 @@
 
   function updateCountdownDisplay2() {
     document.querySelectorAll('.status-time').forEach(el => {
-      el.textContent = timeLeft2 + '초';
+      el.textContent = timeLeft2 + '�?;
       el.classList.toggle('countdown-warn', timeLeft2 <= 5);
     });
   }
@@ -1783,9 +1783,9 @@
       clearInterval(countdown2Timer);
       countdown2Timer = null;
       trackEvent('task2_complete', 'drawer_like');
-      document.querySelectorAll('.status-time').forEach(el => { el.textContent = '완료!'; el.classList.remove('countdown-warn'); });
+      document.querySelectorAll('.status-time').forEach(el => { el.textContent = '?�료!'; el.classList.remove('countdown-warn'); });
       const toast = document.getElementById('success-toast');
-      toast.textContent = '찾았어요! 🎉';
+      toast.textContent = '찾았?�요! ?��';
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 2000);
       setTimeout(() => openSurvey2(true), 5000);
@@ -1796,11 +1796,11 @@
     const msg = document.getElementById('survey2-result-msg');
     const sub = document.getElementById('survey2-result-sub');
     if (success) {
-      msg.textContent = '찾으셨네요! 🎉';
-      sub.textContent = '30초 안에 발견하셨어요';
+      msg.textContent = '찾으?�네?? ?��';
+      sub.textContent = '30�??�에 발견?�셨?�요';
     } else {
-      msg.textContent = '시간이 초과됐어요';
-      sub.textContent = '괜찮아요! 잠깐 질문 2개만요';
+      msg.textContent = '?�간??초과?�어??;
+      sub.textContent = '괜찮?�요! ?�깐 질문 2개만??;
     }
     document.getElementById('survey2-modal').classList.add('open');
   }
@@ -1828,7 +1828,7 @@
   }
 
 
-  // ── 전체 노래 풀 ──
+  // ?�?� ?�체 ?�래 ?� ?�?�
   const songPool = [
     { id: 'magnetic',   name: 'Magnetic',       artist: 'ILLIT',           img: '',  fallback: 'linear-gradient(135deg,#d4a0c0,#8b4060)' },
     { id: 'blueflame',  name: 'Blue Flame',      artist: 'LE SSERAFIM',     img: '',  fallback: 'linear-gradient(135deg,#1a2a6c,#b21f1f)' },
@@ -1846,24 +1846,24 @@
     { id: 'nextlevel',  name: 'Next Level',      artist: 'aespa',           img: '',  fallback: 'linear-gradient(135deg,#40e0c0,#006050)' },
   ];
 
-  // 현재 표시 중인 픽: { idx: number, sim: number }[]
+  // ?�재 ?�시 중인 ?? { idx: number, sim: number }[]
   let currentPicks = [];
-  let added = []; // 재생목록에 추가된 song id 배열
+  let added = []; // ?�생목록??추�???song id 배열
 
-  // ── iTunes API로 앨범 커버 자동 로드 ──
+  // ?�?� iTunes API�??�범 커버 ?�동 로드 ?�?�
   async function fetchArtwork(song) {
     try {
       const q = encodeURIComponent(`${song.name} ${song.artist}`);
       const res = await fetch(`https://itunes.apple.com/search?term=${q}&entity=song&limit=1&country=kr`);
       const data = await res.json();
       if (data.results && data.results.length > 0) {
-        // 100x100 → 600x600으로 고화질 변환
+        // 100x100 ??600x600?�로 고화�?변??
         song.img = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
       }
-    } catch(e) { /* 실패시 fallback 그라디언트 사용 */ }
+    } catch(e) { /* ?�패??fallback 그라?�언???�용 */ }
   }
 
-  // ── 아티스트 사진 fetch (TheAudioDB 공식 아티스트 썸네일) ──
+  // ?�?� ?�티?�트 ?�진 fetch (TheAudioDB 공식 ?�티?�트 ?�네?? ?�?�
   async function fetchArtistPhoto(artistName) {
     try {
       const res = await fetch(`https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodeURIComponent(artistName)}`);
@@ -1876,7 +1876,7 @@
     return null;
   }
 
-  // ── 음악서랍 이미지 세팅 ──
+  // ?�?� ?�악?�랍 ?��?지 ?�팅 ?�?�
   function setDrawerImg(imgId, artId, src, fallback) {
     const imgEl = document.getElementById(imgId);
     if (!imgEl || !src) return;
@@ -1886,14 +1886,14 @@
     imgEl.src = src;
   }
 
-  // ── 초기화 ──
+  // ?�?� 초기???�?�
   async function init() {
-    // 모든 곡 커버를 병렬 로드
+    // 모든 �?커버�?병렬 로드
     await Promise.all(songPool.map(s => fetchArtwork(s)));
     currentPicks = pickRandom([], 3);
     renderMixupList();
 
-    // 고정 플레이리스트 커버: KiiiKiii 404 앨범 이미지 직접 fetch
+    // 고정 ?�레?�리?�트 커버: KiiiKiii 404 ?�범 ?��?지 직접 fetch
     (async () => {
       try {
         const q = encodeURIComponent('404 New Era KiiiKiii');
@@ -1906,13 +1906,13 @@
       } catch(e) {}
     })();
 
-    // 음악서랍 좋아요 패널 이미지 (앨범/아티스트/곡 서브패널)
+    // ?�악?�랍 좋아???�널 ?��?지 (?�범/?�티?�트/�??�브?�널)
     const likeMap = [
-      // 앨범 서브패널
-      { imgId:'likeImg1',       artId:'likeArt1',       songId:'eta'       },  // Delulu Pack 대표
-      { imgId:'likeImg2',       artId:'likeArt2',       songId:'magnetic'  },  // ILLIT 앨범
-      { imgId:'likeImg3',       artId:'likeArt3',       songId:'lovedive'  },  // IVE 앨범
-      // 곡 서브패널
+      // ?�범 ?�브?�널
+      { imgId:'likeImg1',       artId:'likeArt1',       songId:'eta'       },  // Delulu Pack ?�??
+      { imgId:'likeImg2',       artId:'likeArt2',       songId:'magnetic'  },  // ILLIT ?�범
+      { imgId:'likeImg3',       artId:'likeArt3',       songId:'lovedive'  },  // IVE ?�범
+      // �??�브?�널
       { imgId:'likeImg4',       artId:'likeArt4',       songId:'eta'       },
       { imgId:'likeImg5',       artId:'likeArt5',       songId:'magnetic'  },
       { imgId:'likeImg6',       artId:'likeArt6',       songId:'lovedive'  },
@@ -1931,7 +1931,7 @@
       if (song && song.img) setDrawerImg(imgId, artId, song.img, song.fallback);
     });
 
-    // 아티스트 사진 (Deezer 공식 홍보 사진)
+    // ?�티?�트 ?�진 (Deezer 공식 ?�보 ?�진)
     const artistList = [
       { imgId:'likeArtistImg1', name:'KiiiKiii', fallback:'linear-gradient(135deg,#a020a0,#ff69b4)' },
       { imgId:'likeArtistImg2', name:'ILLIT',    fallback:'linear-gradient(135deg,#e87cbe,#ffc0cb)' },
@@ -1944,7 +1944,7 @@
     });
   }
 
-  // ── 화면3 탭 전환 ──
+  // ?�?� ?�면3 ???�환 ?�?�
   function showS3Tab(tab) {
     const isPlaylist = tab === 'playlist';
     document.getElementById('s3-playlist-tab').style.display = isPlaylist ? 'flex' : 'none';
@@ -1953,7 +1953,7 @@
     document.getElementById('tabDrawer').classList.toggle('active', !isPlaylist);
   }
 
-  // ── 음악서랍 필터 탭 전환 ──
+  // ?�?� ?�악?�랍 ?�터 ???�환 ?�?�
   function showDrawerFilter(filter) {
     ['playlist','like','recent'].forEach(f => {
       document.getElementById('dfilter-' + f).classList.toggle('active', f === filter);
@@ -1961,14 +1961,14 @@
     });
   }
 
-  // ── 좋아요 세로 메뉴 전환 ──
+  // ?�?� 좋아???�로 메뉴 ?�환 ?�?�
   function showLikeSub(sub) {
     const menu = document.getElementById('like-menu');
     ['album','artist','song'].forEach(s => {
       document.getElementById('lsubpanel-' + s).classList.remove('active');
     });
     if (sub === null) {
-      // 메뉴로 돌아가기
+      // 메뉴�??�아가�?
       menu.style.display = 'flex';
     } else {
       menu.style.display = 'none';
@@ -1976,7 +1976,7 @@
     }
   }
 
-  // exclude에 없는 인덱스에서 count개 랜덤 선택, { idx, sim } 반환
+  // exclude???�는 ?�덱?�에??count�??�덤 ?�택, { idx, sim } 반환
   function pickRandom(excludeIndices, count) {
     const available = songPool.map((_, i) => i).filter(i => !excludeIndices.includes(i));
     const result = [];
@@ -1989,7 +1989,7 @@
     return result;
   }
 
-  // ── Mixup 목록 렌더 ──
+  // ?�?� Mixup 목록 ?�더 ?�?�
   function renderMixupList() {
     const container = document.getElementById('mixup-track-list');
     const playIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
@@ -2010,7 +2010,7 @@
           <div class="track-info">
             <div class="track-name">${s.name}</div>
             <div class="track-artist">${s.artist}</div>
-            <div class="track-sim">유사도 ${sim}%</div>
+            <div class="track-sim">?�사??${sim}%</div>
           </div>
           <div class="track-actions">
             <button class="track-btn">${playIcon}</button>
@@ -2023,10 +2023,10 @@
     }).join('');
   }
 
-  // ── 새로고침 ──
+  // ?�?� ?�로고침 ?�?�
   function refreshMixup() {
     const icon = document.getElementById('refreshIcon');
-    // 스핀 애니메이션
+    // ?��? ?�니메이??
     icon.style.transition = 'transform 0.45s ease';
     icon.style.transform = 'rotate(360deg)';
     setTimeout(() => {
@@ -2034,13 +2034,13 @@
       icon.style.transform = 'rotate(0deg)';
     }, 460);
 
-    // 현재 표시 중인 인덱스를 제외하고 새로 뽑기
+    // ?�재 ?�시 중인 ?�덱?��? ?�외?�고 ?�로 뽑기
     const currentIndices = currentPicks.map(p => p.idx);
     currentPicks = pickRandom(currentIndices, 3);
     renderMixupList();
   }
 
-  // ── 더보기 모달 ──
+  // ?�?� ?�보�?모달 ?�?�
   function openModal() {
     document.getElementById('song-modal').classList.add('open');
   }
@@ -2048,14 +2048,14 @@
     document.getElementById('song-modal').classList.remove('open');
   }
 
-  // ── 하트 토글 ──
+  // ?�?� ?�트 ?��? ?�?�
   function toggleHeart() {
     const active = document.getElementById('btnHeart').classList.toggle('active');
     document.getElementById('btnHeart2').classList.toggle('active', active);
     document.getElementById('btnHeart3').classList.toggle('active', active);
   }
 
-  // ── 화면 전환 ──
+  // ?�?� ?�면 ?�환 ?�?�
   function goToMixup() {
     mixupClickTime = Date.now();
     trackEvent('mixup_clicked', 'player');
@@ -2089,7 +2089,7 @@
     document.getElementById('screen4').classList.remove('slide-up');
   }
 
-  // ── 트랙 추가 / 제거 ──
+  // ?�?� ?�랙 추�? / ?�거 ?�?�
   function addTrack(id) {
     if (added.includes(id)) {
       goToPlaylist();
@@ -2098,13 +2098,13 @@
     added.push(id);
     task1Success = true;
     trackEvent('song_added', 'mixup');
-    // 과업1 완료 → 카운트다운 중단
+    // 과업1 ?�료 ??카운?�다??중단
     if (countdownTimer) {
       clearInterval(countdownTimer);
       countdownTimer = null;
-      document.querySelectorAll('.status-time').forEach(el => { el.textContent = '완료!'; el.classList.remove('countdown-warn'); });
+      document.querySelectorAll('.status-time').forEach(el => { el.textContent = '?�료!'; el.classList.remove('countdown-warn'); });
       const t1 = document.getElementById('success-toast');
-      t1.textContent = '완료했어요! 🎉';
+      t1.textContent = '?�료?�어?? ?��';
       t1.classList.add('show');
       setTimeout(() => t1.classList.remove('show'), 2000);
     }
@@ -2129,7 +2129,7 @@
     renderS3();
   }
 
-  // ── 재생목록(화면3) 렌더 ──
+  // ?�?� ?�생목록(?�면3) ?�더 ?�?�
   function renderS3() {
     const empty  = document.getElementById('s3-empty');
     const list   = document.getElementById('s3-list');
@@ -2144,7 +2144,7 @@
       empty.style.display  = 'none';
       list.style.display   = 'block';
       footer.style.display = 'flex';
-      fCount.textContent   = added.length + '곡';
+      fCount.textContent   = added.length + '�?;
 
       list.innerHTML = added.map((id, i) => {
         const s = songPool.find(s => s.id === id);
@@ -2160,7 +2160,7 @@
               <div class="s3-track-name">${s.name}</div>
               <div class="s3-track-artist">${s.artist}</div>
             </div>
-            <button class="s3-track-remove" onclick="removeTrack('${id}')" title="제거">
+            <button class="s3-track-remove" onclick="removeTrack('${id}')" title="?�거">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
               </svg>
@@ -2176,9 +2176,9 @@
   async function loadHomeImages() {
     const items = [
       {q:'BUMPA BIBI',i:'h-art0',w:'h-art0-wrap',fb:'linear-gradient(135deg,#c84060,#601030)'},
-      {q:'괜찮아 사랑이니까 PLAVE',i:'h-art1',w:'h-art1-wrap',fb:'linear-gradient(135deg,#6080c0,#202060)'},
+      {q:'괜찮???�랑?�니�?PLAVE',i:'h-art1',w:'h-art1-wrap',fb:'linear-gradient(135deg,#6080c0,#202060)'},
       {q:'HYPER LINK DXMON',i:'h-art2',w:'h-art2-wrap',fb:'linear-gradient(135deg,#0080c0,#001040)'},
-      {q:'오로라 박현규',i:'h-art3',w:'h-art3-wrap',fb:'linear-gradient(135deg,#e0a040,#804010)'},
+      {q:'?�로??박현�?,i:'h-art3',w:'h-art3-wrap',fb:'linear-gradient(135deg,#e0a040,#804010)'},
       {q:'Drowning WOODZ',i:'s0-sart0',w:'s0-sart0-wrap',fb:'linear-gradient(135deg,#2060a0,#081030)'},
       {q:'404 New Era KiiiKiii',i:'s0-sart1',w:'s0-sart1-wrap',fb:'linear-gradient(135deg,#8B2252,#C05080)'},
       {q:'404 New Era KiiiKiii',i:'s0-sart1b',w:'s0-sart1b-wrap',fb:'linear-gradient(135deg,#8B2252,#C05080)'},
@@ -2198,7 +2198,7 @@
     }));
   }
 
-  // 초기 실행
+  // 초기 ?�행
   init();
   loadHomeImages();
 </script>
